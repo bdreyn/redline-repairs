@@ -36,10 +36,9 @@ const SITE_CONFIG = {
   // ── GOOGLE SHEETS BACKEND ────────────────────────
   // See README.md for full setup instructions.
   // Leave URLs empty to use the built-in defaults below.
-  sheets: {
-    servicesUrl:   '',
-    reviewsUrl:    '',
-    missionUrl:    '',
+sheets: {
+    servicesUrl:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtNxn2yfh0DimMOq8qkxoRvC8Z7ZX7aZO9jiTRcAO5YLg5vjW5hbfLqTU6hcVIM7QouXNGO9gNkCb0/pub?gid=1995874112&single=true&output=csv',
+    reviewsUrl:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtNxn2yfh0DimMOq8qkxoRvC8Z7ZX7aZO9jiTRcAO5YLg5vjW5hbfLqTU6hcVIM7QouXNGO9gNkCb0/pub?gid=0&single=true&output=csv',
     formWebAppUrl: '',
   },
 
