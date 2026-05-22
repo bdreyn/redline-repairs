@@ -39,7 +39,7 @@ const SITE_CONFIG = {
 sheets: {
     servicesUrl:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtNxn2yfh0DimMOq8qkxoRvC8Z7ZX7aZO9jiTRcAO5YLg5vjW5hbfLqTU6hcVIM7QouXNGO9gNkCb0/pub?gid=1995874112&single=true&output=csv',
     reviewsUrl:    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtNxn2yfh0DimMOq8qkxoRvC8Z7ZX7aZO9jiTRcAO5YLg5vjW5hbfLqTU6hcVIM7QouXNGO9gNkCb0/pub?gid=0&single=true&output=csv',
-    formWebAppUrl: '',
+    formWebAppUrl: 'https://script.google.com/macros/s/AKfycbzC4LayBQzLZLZg9M2IRCSY-kcJ8pCM7GjL_Iy6l8ew3gLn_KUY6BK4_-7EAJ3HpUiW/exec',
   },
 
   // ── GOOGLE MAPS EMBED ─────────────────────────────
