@@ -237,9 +237,10 @@ function initBookingModal() {
 
 function buildModalContent() {
   const body = document.getElementById('modalBody');
-  const url = SITE_CONFIG.square.bookingUrl;
-  if (url) {
-    body.innerHTML = `<iframe src="${url}" title="Square Appointments Booking" allow="payment" loading="lazy"></iframe>`;
+  const squareScript = document.querySelector('script[src*="square.site/appointments"]');
+  
+  if (squareScript) {
+    body.innerHTML = `<div id="square-appointments"></div>`;
   } else {
     body.innerHTML = `
       <div class="modal-phone-fallback">
