@@ -226,16 +226,7 @@ function buildModalContent() {
 }
 
 function openBooking() {
-  document.getElementById('bookingOverlay').style.display = 'block';
-  document.getElementById('bookingModal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-
-  // Reload Square widget into the container
-  const container = document.getElementById('squareBookingContainer');
-  container.innerHTML = '';
-  const script = document.createElement('script');
-  script.src = 'https://square.site/appointments/buyer/widget/k8y6rrsbcp4q3z/LHR8XX3V8EAJM.js';
-  container.appendChild(script);
+  window.open('https://square.site/appointments/buyer/widget/k8y6rrsbcp4q3z/LHR8XX3V8EAJM', '_blank');
 }
 
 function closeBooking() {
