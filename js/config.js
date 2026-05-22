@@ -51,12 +51,9 @@ sheets: {
 // ── DEFAULT SERVICES ──────────────────────────────
 // Shown when Google Sheets is not configured
 const DEFAULT_SERVICES = [
-  { name: 'Oil Change',           description: 'Full synthetic oil change with filter replacement and multi-point inspection.', imageUrl: 'https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'Brake Service',        description: 'Complete brake inspection, pad replacement, and rotor resurfacing.',           imageUrl: 'https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'Tire Rotation',        description: 'Tire rotation and balance with pressure check and tread assessment.',          imageUrl: 'https://images.pexels.com/photos/13065688/pexels-photo-13065688.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'Engine Diagnostics',   description: 'Complete computer diagnostic scan with detailed report and recommendations.',  imageUrl: 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'AC Service',           description: 'Air conditioning recharge, leak check, and performance testing.',             imageUrl: 'https://images.pexels.com/photos/4489737/pexels-photo-4489737.jpeg?auto=compress&cs=tinysrgb&w=800' },
-  { name: 'Transmission Service', description: 'Transmission fluid flush and filter replacement to extend drivetrain life.',  imageUrl: 'https://images.pexels.com/photos/279949/pexels-photo-279949.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  { name: '',           description: '', imageUrl: '' },
+  { name: '',           description: '', imageUrl: '' },
+  { name: '',           description: '', imageUrl: '' },
 ];
 
 // ── DEFAULT REVIEWS ───────────────────────────────
