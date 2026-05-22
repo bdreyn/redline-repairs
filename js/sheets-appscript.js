@@ -18,8 +18,7 @@
  *    "Inquiries"  — form submissions land here
  *    "Services"   — manually maintained service listings
  *    "Reviews"    — curated Google review list
- *    "Mission"    — single row: heading | paragraph
- * =====================================================
+ *  * =====================================================
  */
 
 // Replace with your actual email to get notifications
