@@ -1,8 +1,6 @@
 /**
  * =====================================================
  *  REDLINE REPAIRS LLC — App Logic
- *  Handles: nav, services, reviews, map, contact form,
- *           Square booking modal, Google Sheets data
  * =====================================================
  */
 
@@ -14,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   loadServices();
   loadReviews();
   initMap();
-  initBookingModal();
   initBackToTop();
 });
 
@@ -45,10 +42,7 @@ function initBackToTop() {
   });
 }
 
-/* ── GOOGLE SHEETS — CSV PARSER ───────────────────
-   Google Sheets → File → Share → Publish to web → CSV
-   Returns array of objects keyed by first-row headers.
-─────────────────────────────────────────────────── */
+/* ── GOOGLE SHEETS — CSV PARSER ─────────────────── */
 async function fetchSheet(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -84,7 +78,7 @@ function parseCSV(text) {
   return rows;
 }
 
-/* ── SERVICES ─────────────────────────────────────── */
+/* ── SERVICES ────────────────────────────────────── */
 async function loadServices() {
   const grid = document.getElementById('servicesGrid');
   try {
@@ -122,7 +116,9 @@ async function loadServices() {
       const card = document.createElement('div');
       card.className = 'service-card';
       card.innerHTML = `
-        <img src="${svc.imageUrl}" alt="${svc.name}" loading="lazy">
+        ${svc.imageUrl
+          ? `<img src="${escapeHtml(svc.imageUrl)}" alt="${escapeHtml(svc.name)}" loading="lazy">`
+          : `<div class="service-img-placeholder"><i data-lucide="wrench"></i></div>`}
         <div class="service-body">
           <h3>${escapeHtml(svc.name)}</h3>
           <p>${escapeHtml(svc.description)}</p>
@@ -156,7 +152,6 @@ async function loadReviews() {
       }
     }
 
-    // Update summary
     const avg = (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
     document.getElementById('ratingNum').textContent = avg;
     document.getElementById('ratingCount').textContent = `(${reviews.length} reviews)`;
@@ -198,46 +193,23 @@ function renderStarsSVG(rating) {
   }).join('');
 }
 
-/* ── BOOKING MODAL ───────────────────────────────── */
-function initBookingModal() {
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeBooking();
-  });
-  buildModalContent();
+/* ── GOOGLE MAP ───────────────────────────────────── */
+function initMap() {
+  const mapDiv = document.getElementById('map');
+  const fallback = document.getElementById('mapFallback');
+  mapDiv.innerHTML = `<iframe
+    src="${SITE_CONFIG.mapEmbedUrl}"
+    width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+  fallback.style.display = 'none';
 }
 
-function buildModalContent() {
-  const body = document.getElementById('modalBody');
-  const squareScript = document.querySelector('script[src*="square.site/appointments"]');
-  
-  if (squareScript) {
-    body.innerHTML = `<div id="square-appointments"></div>`;
-  } else {
-    body.innerHTML = `
-      <div class="modal-phone-fallback">
-        <i data-lucide="calendar"></i>
-        <h3>Book by Phone</h3>
-        <p>Online booking is coming soon. Call us to schedule your appointment.</p>
-        <a href="tel:+19033305749">(903) 330-5749</a>
-      </div>`;
-    lucide.createIcons();
-  }
-}
-
+/* ── SQUARE BOOKING ──────────────────────────────── */
 function openBooking() {
   window.open('https://square.site/appointments/buyer/widget/k8y6rrsbcp4q3z/LHR8XX3V8EAJM', '_blank');
 }
 
-function closeBooking() {
-  document.getElementById('bookingOverlay').style.display = 'none';
-  document.getElementById('bookingModal').style.display = 'none';
-  document.body.style.overflow = '';
-}
-
-/* ── CONTACT FORM → GOOGLE SHEETS ──────────────────
-   Submits to a Google Apps Script Web App.
-   Instructions in README.md and js/sheets-appscript.js
-─────────────────────────────────────────────────── */
+/* ── CONTACT FORM → GOOGLE SHEETS ────────────────── */
 async function submitInquiry(e) {
   e.preventDefault();
   const form = document.getElementById('contactForm');
@@ -250,7 +222,6 @@ async function submitInquiry(e) {
 
   const data = Object.fromEntries(new FormData(form).entries());
 
-  // If no Apps Script URL configured, show a mailto fallback
   if (!SITE_CONFIG.sheets.formWebAppUrl) {
     const subject = encodeURIComponent(`Inquiry: ${data.subject}`);
     const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nMessage: ${data.message}`);
@@ -262,15 +233,12 @@ async function submitInquiry(e) {
   btn.innerHTML = '<div class="spinner" style="width:20px;height:20px;border-width:2px;margin:0 auto;"></div>';
 
   try {
-    const webAppUrl = SITE_CONFIG.sheets.formWebAppUrl;
-    await fetch(webAppUrl, {
+    await fetch(SITE_CONFIG.sheets.formWebAppUrl, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...data, timestamp: new Date().toISOString() }),
     });
-
-    // no-cors means we can't read the response, but success is the default assumption
     successEl.style.display = 'block';
     form.reset();
     successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
