@@ -199,34 +199,6 @@ function renderStarsSVG(rating) {
   }).join('');
 }
 
-/* ── MISSION ─────────────────────────────────────── */
-async function loadMission() {
-  try {
-    if (!SITE_CONFIG.sheets.missionUrl) return;
-    const rows = await fetchSheet(SITE_CONFIG.sheets.missionUrl);
-    if (rows[0]) {
-      if (rows[0].heading) document.getElementById('missionHeading').textContent = rows[0].heading;
-      if (rows[0].paragraph) document.getElementById('missionText').textContent = rows[0].paragraph;
-    }
-  } catch (err) {
-    console.error('Mission load error:', err);
-  }
-}
-
-/* ── GOOGLE MAP ───────────────────────────────────── */
-function initMap() {
-  const mapDiv = document.getElementById('map');
-  const fallback = document.getElementById('mapFallback');
-
-  // Use embed iframe
-  mapDiv.innerHTML = `<iframe
-    src="${SITE_CONFIG.mapEmbedUrl}"
-    width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"></iframe>`;
-  fallback.style.display = 'none';
-}
-
-
 /* ── BOOKING MODAL ───────────────────────────────── */
 function initBookingModal() {
   document.addEventListener('keydown', e => {
@@ -257,7 +229,15 @@ function openBooking() {
   document.getElementById('bookingOverlay').style.display = 'block';
   document.getElementById('bookingModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
+
+  // Reload Square widget into the container
+  const container = document.getElementById('squareBookingContainer');
+  container.innerHTML = '';
+  const script = document.createElement('script');
+  script.src = 'https://square.site/appointments/buyer/widget/k8y6rrsbcp4q3z/LHR8XX3V8EAJM.js';
+  container.appendChild(script);
 }
+
 function closeBooking() {
   document.getElementById('bookingOverlay').style.display = 'none';
   document.getElementById('bookingModal').style.display = 'none';
