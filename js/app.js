@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setYear();
   loadServices();
   loadReviews();
-  loadMission();
   initMap();
   initBookingModal();
   initBackToTop();
