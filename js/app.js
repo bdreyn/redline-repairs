@@ -95,8 +95,8 @@ async function loadServices() {
       const card = document.createElement('div');
       card.className = 'service-card';
       card.innerHTML = `
-        ${svc.imageUrl
-          ? `<img src="${escapeHtml(svc.imageUrl)}" alt="${escapeHtml(svc.name)}" loading="lazy">`
+        ${svc.imageurl
+          ? `<img src="${escapeHtml(svc.imageurl)}" alt="${escapeHtml(svc.name)}" loading="lazy">`
           : `<div class="service-img-placeholder"><i data-lucide="wrench"></i></div>`}
         <div class="service-body">
           <h3>${escapeHtml(svc.name)}</h3>
@@ -116,8 +116,8 @@ async function loadServices() {
       const card = document.createElement('div');
       card.className = 'service-card';
       card.innerHTML = `
-        ${svc.imageUrl
-          ? `<img src="${escapeHtml(svc.imageUrl)}" alt="${escapeHtml(svc.name)}" loading="lazy">`
+        ${svc.imageurl
+          ? `<img src="${escapeHtml(svc.imageurl)}" alt="${escapeHtml(svc.name)}" loading="lazy">`
           : `<div class="service-img-placeholder"><i data-lucide="wrench"></i></div>`}
         <div class="service-body">
           <h3>${escapeHtml(svc.name)}</h3>
