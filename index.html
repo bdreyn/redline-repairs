@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redline Repairs LLC – Expert Auto Repair | Tyler, TX</title>
+  <meta name="description" content="Professional automotive repair and maintenance in Tyler, TX. Honest pricing, certified mechanics, fast service. Call (903) 330-5749." />
+  <meta property="og:title" content="Redline Repairs LLC – Expert Auto Repair | Tyler, TX" />
+  <meta property="og:description" content="Professional automotive repair and maintenance. ASE-certified mechanics, honest pricing, exceptional customer care." />
+  <meta property="og:image" content="https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg?auto=compress&cs=tinysrgb&w=1200" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Lucide icons via CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Google Maps (loaded lazily via JS) -->
+  <!-- Square Appointments Widget -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "Redline Repairs LLC",
+    "telephone": "+19033305749",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "6252 Rhones Quarter Rd # 2B",
+      "addressLocality": "Tyler",
+      "addressRegion": "TX",
+      "postalCode": "75707",
+      "addressCountry": "US"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 32.28036657487671, "longitude": -95.26082249212608 },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00" }
+    ],
+    "priceRange": "$$"
+  }
+  </script>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="navbar">
+  <div class="nav-inner container">
+    <a href="#" class="nav-brand">
+      <div class="brand-icon"><i data-lucide="wrench"></i></div>
+      <div class="brand-text">
+        <span class="brand-name">Redline Repairs</span>
+        <span class="brand-sub">Premium Auto Care</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#reviews" class="nav-link">Reviews</a>
+      <a href="#location" class="nav-link">Location</a>
+      <button class="btn-book-nav" onclick="openBooking()">Book Now</button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
+    <a href="#location" onclick="closeMobileMenu()">Location</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <button class="btn-book-mobile" onclick="openBooking(); closeMobileMenu()">Book Appointment</button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content container">
+    <div class="hero-badge">Expert Auto Care Since 2025</div>
+    <h1 class="hero-title">Premium Auto Repair<br><span class="hero-accent">You Can Trust</span></h1>
+    <p class="hero-sub">Professional automotive services with honest pricing and exceptional customer care. Get your vehicle back on the road with confidence.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="openBooking()">
+        <i data-lucide="calendar"></i> Book Appointment
+      </button>
+      <a href="tel:+19033305749" class="btn-secondary">
+        <i data-lucide="phone"></i> (903) 330-5749
+      </a>
+    </div>
+    <div class="hero-badges">
+      <div class="badge-card">
+        <i data-lucide="clock"></i>
+        <strong>Fast Service</strong>
+        <span>Quick turnaround without compromising quality</span>
+      </div>
+      <div class="badge-card">
+        <i data-lucide="shield-check"></i>
+        <strong>Certified Techs</strong>
+        <span>ASE-certified mechanics you can trust</span>
+      </div>
+      <div class="badge-card">
+        <i data-lucide="badge-dollar-sign"></i>
+        <strong>Fair Pricing</strong>
+        <span>Transparent quotes with no hidden fees</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-fade-bottom"></div>
+</section>
+
+<!-- ===== MISSION ===== -->
+<section id="mission">
+  <div class="container mission-inner">
+    <h2 id="missionHeading">Our Mission</h2>
+    <p id="missionText">At Redline Repairs LLC, we are redefining the automotive repair experience by prioritizing honesty, exceptional quality, and clear communication. Our mission is to instill confidence and peace of mind in our customers throughout each step of the repair process.</p>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Services</span>
+      <h2>Expert Auto Care Solutions</h2>
+      <p>From routine maintenance to complex repairs, we've got you covered</p>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <!-- Populated by JS from Google Sheets or defaults -->
+      <div class="loading-spinner"><div class="spinner"></div></div>
+    </div>
+    <div class="section-cta">
+      <p>Don't see what you're looking for?</p>
+      <a href="#contact" class="btn-outline">Contact Us for Custom Service</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Customer Reviews</span>
+      <h2>What Our Clients Say</h2>
+      <div class="rating-summary" id="ratingSummary">
+        <div class="stars" id="summaryStars"></div>
+        <span class="rating-num" id="ratingNum">5.0</span>
+        <span class="rating-count" id="ratingCount">(0 reviews)</span>
+      </div>
+      <p>Don't just take our word for it — hear from our satisfied customers</p>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid">
+      <div class="loading-spinner"><div class="spinner"></div></div>
+    </div>
+    <div class="section-cta">
+      <a href="https://maps.app.goo.gl/yF8QgXuejdSoJN5t7" target="_blank" rel="noopener" class="btn-primary">
+        Leave Us a Review on Google
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOCATION & CONTACT ===== -->
+<section id="location">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Visit Us</span>
+      <h2>Location &amp; Contact</h2>
+      <p>Stop by our shop or schedule an appointment today</p>
+    </div>
+    <div class="location-grid">
+      <!-- Map + info -->
+      <div class="location-left">
+        <div class="map-wrap">
+          <div id="map"></div>
+          <div class="map-fallback" id="mapFallback">
+            <a href="https://maps.google.com/?q=6252+Rhones+Quarter+Rd+2B+Tyler+TX+75707" target="_blank" rel="noopener" class="map-link-btn">
+              <i data-lucide="map-pin"></i> Open in Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="info-cards">
+          <div class="info-card">
+            <i data-lucide="map-pin"></i>
+            <div>
+              <strong>Address</strong>
+              <a href="https://maps.google.com/?q=6252+Rhones+Quarter+Rd+2B+Tyler+TX+75707" target="_blank" rel="noopener">
+                6252 Rhones Quarter Rd # 2B<br>Tyler, Texas 75707
+              </a>
+            </div>
+          </div>
+          <div class="info-card">
+            <i data-lucide="phone"></i>
+            <div>
+              <strong>Phone</strong>
+              <a href="tel:+19033305749">(903) 330-5749</a>
+            </div>
+          </div>
+          <div class="info-card">
+            <i data-lucide="clock"></i>
+            <div>
+              <strong>Hours</strong>
+              <span>Mon – Fri: 9:00 AM – 6:00 PM</span>
+              <span>Sat: Appointment Only</span>
+              <span>Sun: Closed</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <i data-lucide="mail"></i>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:redlinerepairsllc@icloud.com">redlinerepairsllc@icloud.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div class="location-right" id="contact">
+        <form class="contact-form" id="contactForm" onsubmit="submitInquiry(event)">
+          <h3>Send Us a Message</h3>
+
+          <div class="form-success" id="formSuccess" style="display:none">
+            Thank you! We've received your message and will get back to you soon.
+          </div>
+          <div class="form-error" id="formError" style="display:none"></div>
+
+          <div class="form-group">
+            <label for="fname">Full Name <span>*</span></label>
+            <input type="text" id="fname" name="name" required placeholder="John Doe" />
+          </div>
+          <div class="form-group">
+            <label for="femail">Email Address <span>*</span></label>
+            <input type="email" id="femail" name="email" required placeholder="john@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="fphone">Phone Number</label>
+            <input type="tel" id="fphone" name="phone" placeholder="(123) 456-7890" />
+          </div>
+          <div class="form-group">
+            <label for="fsubject">Subject <span>*</span></label>
+            <select id="fsubject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option>General Inquiry</option>
+              <option>Service Question</option>
+              <option>Appointment Request</option>
+              <option>Custom Service</option>
+              <option>Feedback</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fmessage">Message <span>*</span></label>
+            <textarea id="fmessage" name="message" required rows="5" placeholder="Tell us how we can help you..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <i data-lucide="send"></i> Send Message
+          </button>
+
+          <div class="form-divider"><span>OR</span></div>
+
+          <button type="button" class="btn-book-form" onclick="openBooking()">
+            Book with Square Appointments
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <div class="footer-brand">
+        <div class="brand-icon"><i data-lucide="wrench"></i></div>
+        <div>
+          <span class="brand-name">Redline Repairs</span>
+          <span class="brand-sub">Premium Auto Care</span>
+        </div>
+      </div>
+      <p>Your trusted partner for professional automotive repair and maintenance services.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li>Oil Changes</li>
+        <li>Brake Repair</li>
+        <li>Engine Diagnostics</li>
+        <li>Tire Service</li>
+        <li>AC Repair</li>
+        <li>Transmission Service</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Info</h4>
+      <ul class="footer-contact">
+        <li><i data-lucide="map-pin"></i> 6252 Rhones Quarter Rd # 2B<br>Tyler, Texas 75707</li>
+        <li><i data-lucide="phone"></i> <a href="tel:+19033305749">(903) 330-5749</a></li>
+        <li><i data-lucide="mail"></i> <a href="mailto:redlinerepairsllc@icloud.com">redlinerepairsllc@icloud.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <p>© <span id="year"></span> Redline Repairs LLC. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== BOOKING MODAL ===== -->
+<div id="bookingOverlay" class="modal-overlay" onclick="closeBooking()" style="display:none"></div>
+<div id="bookingModal" class="modal" style="display:none" role="dialog" aria-modal="true" aria-label="Book an Appointment">
+  <div class="modal-header">
+    <div>
+      <h2>Book an Appointment</h2>
+      <p>Select a service and pick a time that works for you</p>
+    </div>
+    <button class="modal-close" onclick="closeBooking()" aria-label="Close"><i data-lucide="x"></i></button>
+  </div>
+  <div class="modal-body" id="modalBody">
+    <!-- Square booking iframe injected by JS if configured, else phone fallback -->
+  </div>
+</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <i data-lucide="arrow-up"></i>
+</button>
+
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
