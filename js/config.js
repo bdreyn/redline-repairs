@@ -90,6 +90,6 @@ const DEFAULT_SERVICES = [
 // Default reviews (shown if Google Sheets not configured)
 const DEFAULT_REVIEWS = [
   { author: 'Marcus T.', rating: 5, text: 'Brought my truck in for a mystery noise — they diagnosed it same day, explained everything clearly, and had it fixed by afternoon. Honest pricing, no surprises. This is my shop from now on.', date: 'April 2025', avatar: '' },
-  { author: 'Jennifer R.', rating: 5, text: 'Best auto shop experience I`'`ve had in Tyler. They communicated every step of the way and finished ahead of schedule. My car runs like new. Highly recommend!', date: 'March 2025', avatar: '' },
+  { author: 'Jennifer R.', rating: 5, text: `Best auto shop experience I've had in Tyler. They communicated every step of the way and finished ahead of schedule. My car runs like new. Highly recommend!`, date: 'March 2025', avatar: '' },
   { author: 'David K.', rating: 5, text: 'Fair prices and fast turnaround. No upselling, just straight talk about what my vehicle actually needed. Refreshing to find a shop you can trust.', date: 'February 2025', avatar: '' },
 ];
