@@ -29,9 +29,9 @@ const SITE_CONFIG = {
   // ── SQUARE BOOKING ────────────────────────────────
   // Square Dashboard -> Appointments -> Online Booking -> Share
   // Looks like: https://squareup.com/appointments/buyer/widget/...
-  square: {
-    bookingUrl: '',
-  },
+square: {
+  bookingUrl: 'k8y6rrsbcp4q3z/LHR8XX3V8EAJM',
+},
 
   // ── GOOGLE SHEETS BACKEND ────────────────────────
   // See README.md for full setup instructions.
