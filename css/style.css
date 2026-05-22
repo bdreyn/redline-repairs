@@ -65,7 +65,13 @@ h3 { font-size: 1.5rem; color: var(--primary); }
   display: flex; align-items: center; gap: .75rem;
   text-decoration: none;
 }
-.nav-logo, .footer-logo {
+.nav-logo {
+  width: 70px;
+  height: auto;
+  object-fit: contain;
+}
+
+.footer-logo {
   width: 120px;
   height: auto;
   object-fit: contain;
