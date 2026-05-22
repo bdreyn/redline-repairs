@@ -215,47 +215,17 @@ async function loadMission() {
 
 /* ── GOOGLE MAP ───────────────────────────────────── */
 function initMap() {
-  const apiKey = SITE_CONFIG.google.mapsApiKey;
   const mapDiv = document.getElementById('map');
   const fallback = document.getElementById('mapFallback');
 
-  if (!apiKey) {
-    // Use embed iframe instead
-    mapDiv.innerHTML = `<iframe
-      src="${SITE_CONFIG.mapEmbedUrl}"
-      width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"></iframe>`;
-    fallback.style.display = 'none';
-    return;
-  }
-
-  // Lazy-load Maps JS on intersection
-  const observer = new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting) return;
-    observer.disconnect();
-    if (window.google?.maps) { _initGoogleMap(); return; }
-
-    window.__redlineMapReady = _initGoogleMap;
-    const s = document.createElement('script');
-    s.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=__redlineMapReady`;
-    s.async = true; s.defer = true;
-    s.onerror = () => { fallback.style.display = 'flex'; };
-    document.head.appendChild(s);
-  }, { rootMargin: '200px' });
-
-  observer.observe(mapDiv);
+  // Use embed iframe
+  mapDiv.innerHTML = `<iframe
+    src="${SITE_CONFIG.mapEmbedUrl}"
+    width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+  fallback.style.display = 'none';
 }
 
-function _initGoogleMap() {
-  const { lat, lng } = SITE_CONFIG.google.mapCenter;
-  const mapDiv = document.getElementById('map');
-  document.getElementById('mapFallback').style.display = 'none';
-  const map = new google.maps.Map(mapDiv, {
-    center: { lat, lng }, zoom: 15,
-    styles: [{ featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'off' }] }],
-  });
-  new google.maps.Marker({ position: { lat, lng }, map, title: 'Redline Repairs LLC' });
-}
 
 /* ── BOOKING MODAL ───────────────────────────────── */
 function initBookingModal() {
