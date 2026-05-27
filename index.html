@@ -73,7 +73,7 @@
     <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
     <a href="#location" onclick="closeMobileMenu()">Location</a>
     <a href="#contact" onclick="closeMobileMenu()">Contact</a>
-    <button class="btn-book-mobile" onclick="openBooking(); closeMobileMenu()">Book Appointment</button>
+    <button class="btn-book-mobile" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'}); closeMobileMenu()">Request Service</button>
   </div>
 </nav>
 
@@ -87,8 +87,8 @@
     <h1 class="hero-title">Premium Auto Repair<br><span class="hero-accent">You Can Trust</span></h1>
     <p class="hero-sub">Professional automotive services with honest pricing and exceptional customer care. Get your vehicle back on the road with confidence.</p>
     <div class="hero-cta">
-      <button class="btn-primary" onclick="openBooking()">
-        <i data-lucide="calendar"></i> Book Appointment
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <i data-lucide="calendar"></i> Request Service
       </button>
       <a href="tel:+19033305749" class="btn-secondary">
         <i data-lucide="phone"></i> (903) 330-5749
@@ -263,12 +263,6 @@
           <button type="submit" class="btn-submit" id="submitBtn">
             <i data-lucide="send"></i> Send Message
           </button>
-
-          <!--<div class="form-divider"><span>OR</span></div>
-
-          <button type="button" class="btn-book-form" onclick="openBooking()">
-            Book with Square Appointments
-          </button> -->
         </form>
       </div>
     </div>
