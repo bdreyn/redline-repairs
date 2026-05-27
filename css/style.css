@@ -216,7 +216,7 @@ h3 { font-size: 1.5rem; color: var(--primary); }
   margin-bottom: 1.25rem; letter-spacing: .01em;
 }
 .hero-accent { color: var(--accent); display: block; }
-.hero-sub { font-size: 1.2rem; color: rgba(255,255,255,.8); margin-bottom: 2.5rem; max-width: 540px; line-height: 1.7; }
+.hero-sub { font-size: 1.2rem; color: rgba(255,255,255,.8); margin-bottom: 2.5rem; max-width: 640px; line-height: 1.7; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
 
 .hero-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 660px; }
