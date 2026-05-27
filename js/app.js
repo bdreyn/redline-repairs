@@ -101,8 +101,8 @@ async function loadServices() {
         <div class="service-body">
           <h3>${escapeHtml(svc.name)}</h3>
           <p>${escapeHtml(svc.description)}</p>
-          <button class="btn-service" onclick="openBooking()">
-            <span>Book This Service</span>
+          <button class="btn-service" onclick="requestService('${escapeHtml(svc.name)}')">
+            <span>Request This Service</span>
             <i data-lucide="arrow-right"></i>
           </button>
         </div>`;
@@ -116,19 +116,41 @@ async function loadServices() {
       const card = document.createElement('div');
       card.className = 'service-card';
       card.innerHTML = `
-        ${svc.imageurl
-          ? `<img src="${escapeHtml(svc.imageurl)}" alt="${escapeHtml(svc.name)}" loading="lazy">`
+        ${svc.imageUrl
+          ? `<img src="${escapeHtml(svc.imageUrl)}" alt="${escapeHtml(svc.name)}" loading="lazy">`
           : `<div class="service-img-placeholder"><i data-lucide="wrench"></i></div>`}
         <div class="service-body">
           <h3>${escapeHtml(svc.name)}</h3>
           <p>${escapeHtml(svc.description)}</p>
-          <button class="btn-service" onclick="openBooking()">
-            <span>Book This Service</span><i data-lucide="arrow-right"></i>
+          <button class="btn-service" onclick="requestService('${escapeHtml(svc.name)}')">
+            <span>Request This Service</span><i data-lucide="arrow-right"></i>
           </button>
         </div>`;
       grid.appendChild(card);
     });
     lucide.createIcons();
+  }
+}
+
+/* ── REQUEST SERVICE — scroll to form + pre-fill ── */
+function requestService(serviceName) {
+  // Set subject dropdown to Appointment Request
+  const subject = document.getElementById('fsubject');
+  if (subject) subject.value = 'Appointment Request';
+
+  // Pre-fill message with service name
+  const message = document.getElementById('fmessage');
+  if (message) message.value = `I'd like to schedule a${/^[aeiou]/i.test(serviceName) ? 'n' : ''} ${serviceName}.`;
+
+  // Scroll to contact form
+  const contact = document.getElementById('contact');
+  if (contact) {
+    contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Focus the name field after scroll
+    setTimeout(() => {
+      const nameField = document.getElementById('fname');
+      if (nameField) nameField.focus();
+    }, 600);
   }
 }
 
@@ -202,11 +224,6 @@ function initMap() {
     width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
     referrerpolicy="no-referrer-when-downgrade"></iframe>`;
   fallback.style.display = 'none';
-}
-
-/* ── SQUARE BOOKING ──────────────────────────────── */
-function openBooking() {
-  window.open('https://square.site/appointments/buyer/widget/k8y6rrsbcp4q3z/LHR8XX3V8EAJM', '_blank');
 }
 
 /* ── CONTACT FORM → GOOGLE SHEETS ────────────────── */
