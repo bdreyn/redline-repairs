@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Guard: if Lucide fails to load, don't let it crash everything else
   try { if (typeof lucide !== 'undefined') lucide.createIcons(); } catch(e) { console.warn('Lucide icons unavailable:', e); }
   initNav();
+  initEventListeners();
   setYear();
   loadServices();
   loadReviews();
@@ -20,6 +21,48 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initEmail();
 });
+
+/* ── EVENT LISTENERS (replaces all inline onclick/onsubmit) ── */
+function initEventListeners() {
+  const scrollToContact = () =>
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+
+  // Nav "Contact Us" button
+  document.getElementById('navContactBtn')
+    ?.addEventListener('click', scrollToContact);
+
+  // Hero "Request Service" button
+  document.getElementById('heroRequestBtn')
+    ?.addEventListener('click', scrollToContact);
+
+  // Hamburger — toggle mobile menu
+  document.getElementById('hamburger')
+    ?.addEventListener('click', () =>
+      document.getElementById('mobileMenu').classList.toggle('open'));
+
+  // Mobile menu — close on any nav link click
+  document.querySelectorAll('.mobile-nav-link').forEach(link =>
+    link.addEventListener('click', closeMobileMenu));
+
+  // Mobile "Request Service" button
+  document.getElementById('mobileRequestBtn')
+    ?.addEventListener('click', () => { scrollToContact(); closeMobileMenu(); });
+
+  // Back-to-top button
+  document.getElementById('backToTop')
+    ?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Contact form submit
+  document.getElementById('contactForm')
+    ?.addEventListener('submit', submitInquiry);
+
+  // Service card buttons — event delegation so it works for dynamically rendered cards
+  document.getElementById('servicesGrid')
+    ?.addEventListener('click', e => {
+      const btn = e.target.closest('.btn-service');
+      if (btn) requestService(btn.dataset.service);
+    });
+}
 
 /* ── NAV ─────────────────────────────────────────── */
 function initNav() {
@@ -29,9 +72,6 @@ function initNav() {
   });
 }
 
-function toggleMobileMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
 function closeMobileMenu() {
   document.getElementById('mobileMenu').classList.remove('open');
 }
@@ -107,7 +147,7 @@ async function loadServices() {
         <div class="service-body">
           <h3>${escapeHtml(svc.name)}</h3>
           <p>${escapeHtml(svc.description)}</p>
-          <button class="btn-service" onclick="requestService('${escapeHtml(svc.name)}')">
+          <button class="btn-service" data-service="${escapeHtml(svc.name)}">
             <span>Request This Service</span>
             <i data-lucide="arrow-right"></i>
           </button>
@@ -118,7 +158,6 @@ async function loadServices() {
   } catch (err) {
     console.error('Services load error:', err);
     grid.innerHTML = '';
-    // Note: use lowercase imageurl to match DEFAULT_SERVICES key
     DEFAULT_SERVICES.forEach(svc => {
       const card = document.createElement('div');
       card.className = 'service-card';
@@ -129,7 +168,7 @@ async function loadServices() {
         <div class="service-body">
           <h3>${escapeHtml(svc.name)}</h3>
           <p>${escapeHtml(svc.description)}</p>
-          <button class="btn-service" onclick="requestService('${escapeHtml(svc.name)}')">
+          <button class="btn-service" data-service="${escapeHtml(svc.name)}">
             <span>Request This Service</span><i data-lucide="arrow-right"></i>
           </button>
         </div>`;
@@ -285,7 +324,7 @@ async function submitInquiry(e) {
     form.reset();
     successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   } catch (err) {
-    errorEl.textContent = 'Failed to send. Please call us directly or email redlinerepairsllc@icloud.com';
+    errorEl.textContent = 'Failed to send. Please call us at (903) 330-5749 or email redlinerepairsllc@icloud.com';
     errorEl.style.display = 'block';
   } finally {
     btn.disabled = false;
