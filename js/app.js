@@ -10,7 +10,8 @@ const _pageLoadTime = Date.now();
 
 /* ── DOM READY ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-  lucide.createIcons();
+  // Guard: if Lucide fails to load, don't let it crash everything else
+  try { if (typeof lucide !== 'undefined') lucide.createIcons(); } catch(e) { console.warn('Lucide icons unavailable:', e); }
   initNav();
   setYear();
   loadServices();
@@ -113,16 +114,17 @@ async function loadServices() {
         </div>`;
       grid.appendChild(card);
     });
-    lucide.createIcons();
+    try { if (typeof lucide !== 'undefined') lucide.createIcons(); } catch(e) {}
   } catch (err) {
     console.error('Services load error:', err);
     grid.innerHTML = '';
+    // Note: use lowercase imageurl to match DEFAULT_SERVICES key
     DEFAULT_SERVICES.forEach(svc => {
       const card = document.createElement('div');
       card.className = 'service-card';
       card.innerHTML = `
-        ${svc.imageUrl
-          ? `<img src="${escapeHtml(svc.imageUrl)}" alt="${escapeHtml(svc.name)}" loading="lazy">`
+        ${svc.imageurl
+          ? `<img src="${escapeHtml(svc.imageurl)}" alt="${escapeHtml(svc.name)}" loading="lazy">`
           : `<div class="service-img-placeholder"><i data-lucide="wrench"></i></div>`}
         <div class="service-body">
           <h3>${escapeHtml(svc.name)}</h3>
@@ -133,7 +135,7 @@ async function loadServices() {
         </div>`;
       grid.appendChild(card);
     });
-    lucide.createIcons();
+    try { if (typeof lucide !== 'undefined') lucide.createIcons(); } catch(e) {}
   }
 }
 
@@ -206,7 +208,7 @@ async function loadReviews() {
         </div>`;
       grid.appendChild(card);
     });
-    lucide.createIcons();
+    try { if (typeof lucide !== 'undefined') lucide.createIcons(); } catch(e) {}
   } catch (err) {
     console.error('Reviews load error:', err);
     grid.innerHTML = '<p style="text-align:center;color:var(--gray-400);padding:2rem;">Reviews temporarily unavailable.</p>';
@@ -288,7 +290,7 @@ async function submitInquiry(e) {
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<i data-lucide="send"></i> Send Message';
-    lucide.createIcons();
+    try { if (typeof lucide !== 'undefined') lucide.createIcons(); } catch(e) {}
   }
 }
 
