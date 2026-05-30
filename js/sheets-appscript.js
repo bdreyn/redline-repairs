@@ -28,9 +28,29 @@ const NOTIFY_EMAIL = 'redlinerepairsllc@icloud.com';
  * Handles POST from the contact form.
  * The site sends JSON via fetch with mode:'no-cors'.
  */
+// Minimum milliseconds between submissions from the same email (5 minutes)
+const RATE_LIMIT_MS = 5 * 60 * 1000;
+
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
+
+    // Server-side honeypot check — silently succeed to avoid tipping off bots
+    if (data.website) {
+      Logger.log('Honeypot triggered — bot submission blocked.');
+      return ContentService
+        .createTextOutput(JSON.stringify({ success: true }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Rate limit: reject if same email submitted within the last 5 minutes
+    if (isRateLimited(data.email)) {
+      Logger.log('Rate limit triggered for: ' + data.email);
+      return ContentService
+        .createTextOutput(JSON.stringify({ success: false, error: 'Too many requests.' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     appendToInquiries(data);
     sendNotificationEmail(data);
     return ContentService
@@ -41,6 +61,30 @@ function doPost(e) {
     return ContentService
       .createTextOutput(JSON.stringify({ success: false, error: err.message }))
       .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * Returns true if the given email has submitted within the last RATE_LIMIT_MS.
+ * Checks the Inquiries sheet for a recent matching email row.
+ */
+function isRateLimited(email) {
+  if (!email) return false;
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName('Inquiries');
+    if (!sheet || sheet.getLastRow() < 2) return false;
+    const now = Date.now();
+    // Read timestamp (col 1) and email (col 3) for all rows
+    const data = sheet.getRange(2, 1, sheet.getLastRow() - 1, 3).getValues();
+    return data.some(row => {
+      const rowEmail = String(row[2]).trim().toLowerCase();
+      const rowTime  = new Date(row[0]).getTime();
+      return rowEmail === email.trim().toLowerCase() && (now - rowTime) < RATE_LIMIT_MS;
+    });
+  } catch (err) {
+    Logger.log('isRateLimited error: ' + err.message);
+    return false;
   }
 }
 
