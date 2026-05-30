@@ -578,7 +578,7 @@ h3 { font-size: 1.5rem; color: var(--primary); }
 .area-card svg {
   width: 16px;
   height: 16px;
-  color: var(--primary, #e63946);
+  color: var(--accent-h, #e63946);
   flex-shrink: 0;
 }
 
