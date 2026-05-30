@@ -538,6 +538,75 @@ h3 { font-size: 1.5rem; color: var(--primary); }
   .contact-form { padding: 1.5rem; }
 }
 
+/* ── AREAS SERVED ─────────────────────────────────── */
+#areas-served {
+  padding: 5rem 0;
+  background: var(--dark-2, #1a1a1a);
+}
+
+#areas-served .section-header {
+  margin-bottom: 2.5rem;
+}
+
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.area-card {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--dark-3, #222);
+  border: 1px solid var(--border, #333);
+  border-radius: 8px;
+  padding: 0.85rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--gray-200, #e5e5e5);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.area-card:hover {
+  border-color: var(--primary, #e63946);
+  color: #fff;
+}
+
+.area-card i,
+.area-card svg {
+  width: 16px;
+  height: 16px;
+  color: var(--primary, #e63946);
+  flex-shrink: 0;
+}
+
+.areas-note {
+  text-align: center;
+  color: var(--gray-400, #999);
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+
+.areas-note a {
+  color: var(--primary, #e63946);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.areas-note a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .areas-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .areas-grid { grid-template-columns: 1fr 1fr; }
+}
+
 /* ── SECURITY ──────────────────────────────────────── */
 /* Honeypot — visually hidden but NOT display:none so bots still render and fill it */
 .hp-field {
