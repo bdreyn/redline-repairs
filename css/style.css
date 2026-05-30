@@ -537,3 +537,17 @@ h3 { font-size: 1.5rem; color: var(--primary); }
   .btn-primary, .btn-secondary { justify-content: center; }
   .contact-form { padding: 1.5rem; }
 }
+
+/* ── SECURITY ──────────────────────────────────────── */
+/* Honeypot — visually hidden but NOT display:none so bots still render and fill it */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  tab-index: -1;
+}
