@@ -133,7 +133,19 @@ async function loadServices() {
     if (SITE_CONFIG.sheets.servicesUrl) {
       const rows = await fetchSheet(SITE_CONFIG.sheets.servicesUrl);
       const visible = rows.filter(r => r.visible !== 'false' && r.visible !== '0' && r.visible !== 'FALSE');
-      if (visible.length) services = visible;
+      if (visible.length) {
+        // Merge: if a Sheets row has no imageurl, fall back to the matching
+        // DEFAULT_SERVICES entry by name so local images are always shown.
+        const defMap = {};
+        DEFAULT_SERVICES.forEach(d => { defMap[d.name.toLowerCase()] = d; });
+        services = visible.map(svc => {
+          if (!svc.imageurl) {
+            const def = defMap[( svc.name || '').toLowerCase()];
+            if (def) return { ...svc, imageurl: def.imageurl };
+          }
+          return svc;
+        });
+      }
     }
 
     grid.innerHTML = '';
