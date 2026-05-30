@@ -13,15 +13,15 @@ const SITE_CONFIG = {
     tagline: 'Premium Auto Repair You Can Trust',
     phone:   '(903) 330-5749',
     email:   'redlinerepairsllc@icloud.com',
-    address: '6252 Rhones Quarter Rd # 2B\nTyler, Texas 75707',
+    address: '6252 Rhones Quarter Rd\nTyler, Texas 75707',
     hours: {
-      mon_fri:  '9:00 AM - 6:00 PM',
-      saturday: 'Appointment Only',
+      mon_fri:  '9:00 AM - 5:00 PM',
+      saturday: 'Closed',
       sunday:   'Closed',
     },
     social: {
-      facebook:  '',
-      instagram: '',
+      facebook:  'https://www.facebook.com/RedlineRepairsLLC',
+      instagram: 'https://www.instagram.com/redlinerepairsllc',
       twitter:   '',
     },
   },
@@ -51,9 +51,36 @@ sheets: {
 // ── DEFAULT SERVICES ──────────────────────────────
 // Shown when Google Sheets is not configured
 const DEFAULT_SERVICES = [
-  { name: '',           description: '', imageUrl: '' },
-  { name: '',           description: '', imageUrl: '' },
-  { name: '',           description: '', imageUrl: '' },
+  {
+    name: 'Oil Change & Filter',
+    description: 'Keep your engine running clean with a full-service oil change. We use quality oil and filters, and perform a complimentary multi-point inspection with every service.',
+    imageurl: 'images/pexels-oil-change.jpeg',
+  },
+  {
+    name: 'Brake Repair & Service',
+    description: 'From worn brake pads to rotor resurfacing, our mechanics diagnose and fix your brake system right. Don\'t wait — safe stopping is non-negotiable.',
+    imageurl: 'images/brakes.webp',
+  },
+  {
+    name: 'Engine Diagnostics',
+    description: 'Check engine light on? We use advanced diagnostic tools to pinpoint the exact issue fast, explain it in plain language, and give you an honest repair quote.',
+    imageurl: 'images/pexels-engine-diagnostic.jpeg',
+  },
+  {
+    name: 'Tire Rotation & Balancing',
+    description: 'Extend the life of your tires and improve fuel economy with regular rotation and balancing. We check tread depth and pressure too.',
+    imageurl: 'images/tire-rotation.webp',
+  },
+  {
+    name: 'AC Repair & Recharge',
+    description: 'East Texas summers are brutal. We diagnose AC problems, recharge refrigerant, and repair compressors and leaks to keep you cool on the road.',
+    imageurl: 'images/air-conditioning-repair.webp',
+  },
+  {
+    name: 'Transmission Service',
+    description: 'From fluid flushes to full transmission repairs, we service automatic and manual transmissions. Catch small issues early before they become expensive problems.',
+    imageurl: 'images/transmission.webp',
+  },
 ];
 
 // ── DEFAULT REVIEWS ───────────────────────────────
