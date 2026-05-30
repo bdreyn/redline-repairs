@@ -119,18 +119,18 @@
       <a href="#services" class="nav-link">Services</a>
       <a href="#reviews" class="nav-link">Reviews</a>
       <a href="#location" class="nav-link">Location</a>
-      <button class="btn-book-nav" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button>
+      <button class="btn-book-nav" id="navContactBtn">Contact Us</button>
     </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#services" onclick="closeMobileMenu()">Services</a>
-    <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
-    <a href="#location" onclick="closeMobileMenu()">Location</a>
-    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
-    <button class="btn-book-mobile" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'}); closeMobileMenu()">Request Service</button>
+    <a href="#services" class="mobile-nav-link">Services</a>
+    <a href="#reviews" class="mobile-nav-link">Reviews</a>
+    <a href="#location" class="mobile-nav-link">Location</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
+    <button class="btn-book-mobile" id="mobileRequestBtn">Request Service</button>
   </div>
 </nav>
 
@@ -144,8 +144,8 @@
     <h1 class="hero-title">Tyler's Auto Repair Shop You Can Trust</h1>
     <p class="hero-sub">Honest pricing, transparent quotes, no surprises. Redline Repairs LLC serves Tyler, TX and all of East Texas — from oil changes to engine diagnostics, we keep your vehicle running right.</p>
     <div class="hero-cta">
-      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-      <i data-lucide="calendar"></i> Request Service
+      <button class="btn-primary" id="heroRequestBtn">
+        <i data-lucide="calendar"></i> Request Service
       </button>
       <a href="tel:+19033305749" class="btn-secondary">
         <i data-lucide="phone"></i> (903) 330-5749
@@ -280,7 +280,7 @@
 
       <!-- Contact form -->
       <div class="location-right" id="contact">
-        <form class="contact-form" id="contactForm" onsubmit="submitInquiry(event)">
+        <form class="contact-form" id="contactForm">
           <h3>Send Us a Message</h3>
 
           <div class="form-success" id="formSuccess" style="display:none">
@@ -410,7 +410,7 @@
   </div>
 </footer>
 <!-- Back to top -->
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
   <i data-lucide="arrow-up"></i>
 </button>
 
