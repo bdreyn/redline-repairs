@@ -4,6 +4,10 @@
  * =====================================================
  */
 
+/* ── BOT PROTECTION ──────────────────────────────── */
+// Record page load time; submissions under 3 seconds are almost certainly bots
+const _pageLoadTime = Date.now();
+
 /* ── DOM READY ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
@@ -13,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadReviews();
   initMap();
   initBackToTop();
+  initEmail();
 });
 
 /* ── NAV ─────────────────────────────────────────── */
@@ -239,6 +244,24 @@ async function submitInquiry(e) {
 
   const data = Object.fromEntries(new FormData(form).entries());
 
+  // Honeypot check — real users never fill the hidden "website" field
+  if (data.website) {
+    // Silently succeed to avoid tipping off bots that they were caught
+    successEl.style.display = 'block';
+    form.reset();
+    return;
+  }
+
+  // Minimum time check — reject submissions faster than 3 seconds (bots)
+  if (Date.now() - _pageLoadTime < 3000) {
+    errorEl.textContent = 'Please take a moment to review your message before sending.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  // Remove honeypot field from payload before sending
+  delete data.website;
+
   if (!SITE_CONFIG.sheets.formWebAppUrl) {
     const subject = encodeURIComponent(`Inquiry: ${data.subject}`);
     const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nMessage: ${data.message}`);
@@ -267,6 +290,22 @@ async function submitInquiry(e) {
     btn.innerHTML = '<i data-lucide="send"></i> Send Message';
     lucide.createIcons();
   }
+}
+
+/* ── EMAIL OBFUSCATION ───────────────────────────── */
+// Split so the plain address never appears in source — defeats simple scrapers
+function initEmail() {
+  const user   = 'redlinerepairsllc';
+  const domain = 'icloud.com';
+  const addr   = user + '@' + domain;
+  const href   = 'mailto:' + addr;
+  ['contactEmail', 'footerEmail'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.href        = href;
+    el.textContent = addr;
+    el.onclick     = null;
+  });
 }
 
 /* ── UTILITY ─────────────────────────────────────── */
