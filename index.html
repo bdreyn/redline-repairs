@@ -25,7 +25,7 @@
   <meta name="twitter:description" content="Trusted auto repair in Tyler, TX. Honest pricing, transparent quotes. Call (903) 330-5749." />
 
   <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://images.pexels.com data: blob:; frame-src https://www.google.com; connect-src 'self' https://docs.google.com https://script.google.com;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://images.pexels.com https://*.gstatic.com data: blob:; frame-src https://www.google.com https://maps.google.com; connect-src 'self' https://*.google.com https://*.googleapis.com;" />
   <!-- Security headers via meta -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
@@ -36,8 +36,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- Lucide icons — pinned version to avoid supply-chain risk from @latest -->
-  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js" crossorigin="anonymous"></script>
+  <!-- Lucide icons — using @latest; pin to a specific verified version once confirmed working -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="css/style.css" />
 
