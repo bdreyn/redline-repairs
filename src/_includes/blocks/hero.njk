@@ -1,0 +1,47 @@
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content container">
+    {% if block.badge %}<div class="hero-badge">{{ block.badge }}</div>{% endif %}
+    <h1 class="hero-title">{{ block.title }}</h1>
+    <p class="hero-sub">{{ block.subtitle }}</p>
+    {% if page.url == "/" %}
+    <div class="hero-cta">
+      <button class="btn-primary" id="heroRequestBtn">
+        <i data-lucide="calendar"></i> Request Service
+      </button>
+      <a href="tel:{{ site.business.phone_tel }}" class="btn-secondary">
+        <i data-lucide="phone"></i> {{ site.business.phone }}
+      </a>
+    </div>
+    <div class="hero-badges">
+      <div class="badge-card">
+        <i data-lucide="clock"></i>
+        <strong>Fast Service</strong>
+        <span>Quick turnaround without compromising quality</span>
+      </div>
+      <div class="badge-card">
+        <i data-lucide="shield-check"></i>
+        <strong>Flexible Scheduling</strong>
+        <span>Strive to accomodate your schedule</span>
+      </div>
+      <div class="badge-card">
+        <i data-lucide="badge-dollar-sign"></i>
+        <strong>Fair Pricing</strong>
+        <span>Transparent quotes with no hidden fees</span>
+      </div>
+    </div>
+    {% else %}
+    <div class="hero-cta">
+      <a href="/#contact" class="btn-primary">
+        <i data-lucide="calendar"></i> Request Service
+      </a>
+      <a href="tel:{{ site.business.phone_tel }}" class="btn-secondary">
+        <i data-lucide="phone"></i> {{ site.business.phone }}
+      </a>
+    </div>
+    {% endif %}
+  </div>
+  <div class="hero-fade-bottom"></div>
+</section>

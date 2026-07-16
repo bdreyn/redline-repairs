@@ -1,0 +1,15 @@
+<section id="{{ block.id or 'areas-served' }}">
+  <div class="container">
+    <div class="section-header">
+      {% if block.label %}<span class="section-label">{{ block.label }}</span>{% endif %}
+      <h2>{{ block.heading }}</h2>
+      {% if block.subheading %}<p>{{ block.subheading }}</p>{% endif %}
+    </div>
+    <div class="areas-grid">
+      {% for area in block.areas %}
+      <div class="area-card"><i data-lucide="map-pin"></i><span>{{ area }}</span></div>
+      {% endfor %}
+    </div>
+    <p class="areas-note">Not sure if we serve your area? <a href="tel:{{ site.business.phone_tel }}">Give us a call</a> — we're happy to help East Texas drivers get back on the road.</p>
+  </div>
+</section>

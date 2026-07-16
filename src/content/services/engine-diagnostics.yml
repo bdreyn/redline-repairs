@@ -1,0 +1,6 @@
+name: "Engine Diagnostics"
+description: "Check engine light on? We use advanced diagnostic tools to pinpoint the exact issue fast, explain it in plain language, and give you an honest repair quote."
+image: "/images/pexels-engine-diagnostic.jpeg"
+order: 30
+visible: true
+featured: false

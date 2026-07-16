@@ -1,0 +1,36 @@
+{% set homePrefix = "" if page.url == "/" else "/" %}
+<nav id="navbar">
+  <div class="nav-inner container">
+    <a href="/" class="nav-brand">
+      <div class="brand-text">
+        <img class="nav-logo" src="{{ site.logo }}" alt="{{ site.business.name }}" />
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="{{ homePrefix }}#services" class="nav-link">Services</a>
+      <a href="{{ homePrefix }}#reviews" class="nav-link">Reviews</a>
+      <a href="{{ homePrefix }}#location" class="nav-link">Location</a>
+      {% for navPage in pagesList %}
+        {% if navPage.show_in_nav %}
+      <a href="/{{ navPage.slug }}/" class="nav-link">{{ navPage.nav_label or navPage.title }}</a>
+        {% endif %}
+      {% endfor %}
+      <button class="btn-book-nav" id="navContactBtn">Contact Us</button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="{{ homePrefix }}#services" class="mobile-nav-link">Services</a>
+    <a href="{{ homePrefix }}#reviews" class="mobile-nav-link">Reviews</a>
+    <a href="{{ homePrefix }}#location" class="mobile-nav-link">Location</a>
+    {% for navPage in pagesList %}
+      {% if navPage.show_in_nav %}
+    <a href="/{{ navPage.slug }}/" class="mobile-nav-link">{{ navPage.nav_label or navPage.title }}</a>
+      {% endif %}
+    {% endfor %}
+    <a href="{{ homePrefix }}#contact" class="mobile-nav-link">Contact</a>
+    <button class="btn-book-mobile" id="mobileRequestBtn">Request Service</button>
+  </div>
+</nav>

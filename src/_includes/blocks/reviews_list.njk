@@ -1,0 +1,46 @@
+{% macro stars(rating) %}
+  {% for i in range(0, 5) %}<svg class="star {{ 'filled' if i < rating else 'empty' }}" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{% endfor %}
+{% endmacro %}
+
+<section id="{{ block.id or 'reviews' }}">
+  <div class="container">
+    <div class="section-header">
+      {% if block.label %}<span class="section-label">{{ block.label }}</span>{% endif %}
+      <h2>{{ block.heading }}</h2>
+      <div class="rating-summary" id="ratingSummary">
+        <div class="stars" id="summaryStars">{{ stars(reviews.average | round) }}</div>
+        <span class="rating-num" id="ratingNum">{{ reviews.averageDisplay }}</span>
+        <span class="rating-count" id="ratingCount">({{ reviews.count }} reviews)</span>
+      </div>
+      {% if block.subheading %}<p>{{ block.subheading }}</p>{% endif %}
+    </div>
+    <div class="reviews-grid" id="reviewsGrid">
+      {% for review in reviews.items %}
+      <div class="review-card">
+        <svg class="review-quote" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+        <div class="review-header">
+          {% if review.avatar %}
+          <img class="review-avatar" src="{{ review.avatar }}" alt="{{ review.author }}" loading="lazy">
+          {% else %}
+          <div class="review-avatar" style="display:flex;align-items:center;justify-content:center;background:var(--primary-l);color:white;font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:700;">{{ review.author | first }}</div>
+          {% endif %}
+          <div class="review-author">
+            <strong>{{ review.author }}</strong>
+            <span>{{ review.date | prettyDate }}</span>
+          </div>
+        </div>
+        <div class="review-stars">{{ stars(review.rating) }}</div>
+        <p class="review-text">{{ review.text }}</p>
+        <div class="review-footer">
+          <span class="review-verified"><i data-lucide="check-circle"></i> Verified Google Review</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="section-cta">
+      <a href="{{ site.map.google_maps_short_url }}" target="_blank" rel="noopener" class="btn-primary">
+        Leave Us a Review on Google
+      </a>
+    </div>
+  </div>
+</section>

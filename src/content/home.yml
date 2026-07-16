@@ -1,0 +1,43 @@
+blocks:
+  - type: hero
+    badge: "Tyler, TX Auto Repair Since 2025"
+    title: "Tyler's Auto Repair Shop You Can Trust"
+    subtitle: "Honest pricing, transparent quotes, no surprises. Redline Repairs LLC serves Tyler, TX and all of East Texas — from oil changes to engine diagnostics, we keep your vehicle running right."
+
+  - type: richtext
+    id: mission
+    heading: "Tyler's Honest Auto Repair Shop"
+    body: "At Redline Repairs LLC in Tyler, TX, we're redefining the auto repair experience for East Texas drivers. We prioritize honesty, quality, and clear communication — so you always know exactly what's being done to your vehicle and why. No surprise charges, no unnecessary upsells. Just trustworthy car care from a local mechanic you can count on."
+
+  - type: services_list
+    id: services
+    label: "Our Services"
+    heading: "Auto Repair Services in Tyler, TX"
+    subheading: "From routine maintenance to complex repairs, Redline Repairs LLC has East Texas drivers covered"
+
+  - type: reviews_list
+    id: reviews
+    label: "Customer Reviews"
+    heading: "What Our Clients Say"
+    subheading: "Don't just take our word for it — hear from our satisfied customers"
+
+  - type: map_location
+    id: location
+    label: "Visit Us"
+    heading: "Location & Contact"
+    subheading: "Stop by our shop or schedule an appointment today"
+
+  - type: areas_served
+    id: areas-served
+    label: "Service Area"
+    heading: "Proudly Serving Tyler & East Texas"
+    subheading: "Redline Repairs LLC is your local mechanic for Tyler and the surrounding East Texas communities"
+    areas:
+      - "Tyler, TX"
+      - "Whitehouse, TX"
+      - "Lindale, TX"
+      - "Flint, TX"
+      - "Bullard, TX"
+      - "Troup, TX"
+      - "Longview, TX"
+      - "Jacksonville, TX"

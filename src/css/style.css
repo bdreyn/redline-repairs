@@ -620,3 +620,41 @@ h3 { font-size: 1.5rem; color: var(--primary); }
   pointer-events: none;
   tab-index: -1;
 }
+
+/* ===== ANNOUNCEMENT BAR ===== */
+:root { --announcement-height: 44px; }
+.announcement-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+  background: var(--accent); color: white;
+  text-align: center; font-size: .9rem; font-weight: 600;
+  min-height: var(--announcement-height);
+}
+.announcement-inner {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: .5rem 1rem;
+  padding: .6rem 1.25rem;
+}
+.announcement-link {
+  color: white; text-decoration: underline; white-space: nowrap;
+}
+body.has-announcement #navbar { top: var(--announcement-height); }
+body.has-announcement #hero { padding-top: calc(100px + var(--announcement-height)); }
+
+/* ===== FEATURED SERVICE ===== */
+.service-card--featured {
+  position: relative;
+  border: 2px solid var(--accent);
+}
+.service-featured-badge {
+  position: absolute; top: .75rem; right: .75rem; z-index: 1;
+  background: var(--accent); color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  padding: .3rem .75rem; border-radius: 50px;
+}
+
+/* ===== CTA / CUSTOM HTML BLOCKS ===== */
+.cta-block { padding: 4rem 0; background: var(--gray-100); text-align: center; }
+.cta-block-inner { max-width: 640px; margin: 0 auto; }
+.cta-block-inner p { font-size: 1.15rem; color: var(--gray-700); margin-bottom: 1.5rem; }
+.custom-html-block { padding: 3rem 0; }

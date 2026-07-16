@@ -1,0 +1,9 @@
+---
+layout: layouts/base.njk
+permalink: /index.html
+pageTitle: null
+pageDescription: null
+---
+{% for block in home.blocks %}
+{% include "blocks/" + block.type + ".njk" %}
+{% endfor %}

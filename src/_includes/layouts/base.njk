@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ pageTitle or site.seo.title }}</title>
+  <link rel="canonical" href="{{ site.site_url }}{{ page.url }}" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="description" content="{{ pageDescription or site.seo.description }}" />
+  <meta name="robots" content="{{ 'noindex, nofollow' if pageNoindex else 'index, follow' }}" />
+  <meta name="geo.region" content="US-TX" />
+  <meta name="geo.placename" content="{{ site.business.city }}, Texas" />
+  <meta name="geo.position" content="{{ site.map.lat }};{{ site.map.lng }}" />
+  <meta name="ICBM" content="{{ site.map.lat }}, {{ site.map.lng }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ site.site_url }}{{ page.url }}" />
+  <meta property="og:site_name" content="{{ site.business.name }}" />
+  <meta property="og:title" content="{{ pageTitle or site.seo.title }}" />
+  <meta property="og:description" content="{{ pageDescription or site.seo.description }}" />
+  <meta property="og:image" content="{{ site.site_url }}{{ site.logo }}" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ pageTitle or site.seo.title }}" />
+  <meta name="twitter:description" content="{{ pageDescription or site.seo.description }}" />
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://raw.githubusercontent.com https://images.pexels.com https://*.gstatic.com data: blob:; frame-src https://www.google.com https://maps.google.com; connect-src 'self' https://*.google.com https://*.googleapis.com https://*.googleusercontent.com;" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="/css/style.css" />
+
+  {% include "partials/jsonld.njk" %}
+</head>
+<body{% if announcement.active %} class="has-announcement"{% endif %}>
+
+{% include "partials/announcement-bar.njk" %}
+{% include "partials/nav.njk" %}
+
+<main>
+{{ content | safe }}
+</main>
+
+{% include "partials/footer.njk" %}
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <i data-lucide="arrow-up"></i>
+</button>
+
+<script>
+  window.SITE_CONFIG = {
+    business: {
+      phone: {{ site.business.phone | dump | safe }},
+      email: {{ site.business.email | dump | safe }}
+    },
+    mapEmbedUrl: {{ site.map.embed_url | dump | safe }},
+    sheets: {
+      formWebAppUrl: {{ site.sheets.form_web_app_url | dump | safe }}
+    }
+  };
+</script>
+<script src="/js/app.js"></script>
+</body>
+</html>

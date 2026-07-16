@@ -1,0 +1,52 @@
+<footer id="footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <div class="footer-brand">
+        <div>
+          <img class="footer-logo" src="{{ site.logo }}" alt="{{ site.business.name }}" />
+        </div>
+      </div>
+      <p>Your trusted partner for professional automotive repair and maintenance services.</p>
+      <div class="footer-social">
+        {% if site.business.social.facebook %}
+        <a href="{{ site.business.social.facebook }}" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        {% endif %}
+        {% if site.business.social.instagram %}
+        <a href="{{ site.business.social.instagram }}" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg></a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#reviews">Reviews</a></li>
+        <li><a href="/#location">Location</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        {% for service in services %}
+        <li>{{ service.name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Info</h4>
+      <ul class="footer-contact">
+        <li><i data-lucide="map-pin"></i> {{ site.business.address_line1 }}<br>{{ site.business.address_line2 }}</li>
+        <li><i data-lucide="phone"></i> <a href="tel:{{ site.business.phone_tel }}">{{ site.business.phone }}</a></li>
+        <li><i data-lucide="mail"></i> <a id="footerEmail" href="#" onclick="return false;">Loading...</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <p>© <span id="year"></span> {{ site.business.name }}. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>

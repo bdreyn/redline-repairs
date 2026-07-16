@@ -1,0 +1,6 @@
+name: "Mobile Auto Repair"
+description: "Can't make it to the shop? We'll come to you. Our mobile service brings oil changes, brake work, diagnostics, and more straight to your driveway or office parking lot, anywhere in Tyler and East Texas."
+image: "/images/logo-white.png"
+order: 5
+visible: true
+featured: true

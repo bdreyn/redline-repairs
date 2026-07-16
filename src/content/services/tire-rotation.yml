@@ -1,0 +1,6 @@
+name: "Tire Rotation & Balancing"
+description: "Extend the life of your tires and improve fuel economy with regular rotation and balancing. We check tread depth and pressure too."
+image: "/images/tire-rotation.webp"
+order: 40
+visible: true
+featured: false

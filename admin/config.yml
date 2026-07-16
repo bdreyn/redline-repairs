@@ -1,0 +1,234 @@
+backend:
+  name: github
+  repo: bdreyn/redline-repairs
+  # NOTE: points at the review branch during Phase G testing.
+  # Change to `main` at cutover (see plan Phase G, step 6).
+  branch: sveltia-cms
+  # NOTE: placeholder — replace with your deployed sveltia-cms-auth Worker URL
+  # (see plan Phase C.1), e.g. https://sveltia-cms-auth.<you>.workers.dev
+  base_url: https://REPLACE-ME.workers.dev
+
+site_url: https://www.redlinerepairsllc.com
+
+media_folder: src/images/uploads
+public_folder: /images/uploads
+
+singletons:
+  - name: site
+    label: Site Settings
+    file: src/content/site.yml
+    format: yaml
+    icon: settings
+    fields:
+      - name: site_url
+        label: Site URL
+        widget: string
+      - name: logo
+        label: Logo
+        widget: image
+      - name: seo
+        label: Default SEO
+        widget: object
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: description, label: Description, widget: text }
+      - name: business
+        label: Business
+        widget: object
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: tagline, label: Tagline, widget: string }
+          - { name: phone, label: "Phone (display)", widget: string }
+          - { name: phone_tel, label: "Phone (tel: link, e.g. +19035551234)", widget: string }
+          - { name: email, label: Email, widget: string }
+          - { name: address_line1, label: "Address line 1", widget: string }
+          - { name: address_line2, label: "Address line 2 (city, state zip)", widget: string }
+          - { name: street_address, label: "Street address (with suite, for SEO)", widget: string }
+          - { name: city, label: City, widget: string }
+          - { name: region, label: "State", widget: string }
+          - { name: postal_code, label: "ZIP", widget: string }
+          - { name: country, label: "Country code", widget: string }
+          - name: hours
+            label: Hours
+            widget: object
+            fields:
+              - { name: mon_fri, label: "Mon–Fri", widget: string }
+              - { name: saturday, label: Saturday, widget: string }
+              - { name: sunday, label: Sunday, widget: string }
+          - name: social
+            label: Social
+            widget: object
+            fields:
+              - { name: facebook, label: Facebook URL, widget: string, required: false }
+              - { name: instagram, label: Instagram URL, widget: string, required: false }
+      - name: square_booking_url
+        label: Square Booking URL
+        widget: string
+        required: false
+      - name: map
+        label: Map
+        widget: object
+        fields:
+          - { name: embed_url, label: Google Maps Embed URL, widget: string }
+          - { name: lat, label: Latitude, widget: number }
+          - { name: lng, label: Longitude, widget: number }
+          - { name: fallback_url, label: "Map link (general)", widget: string }
+          - { name: address_url, label: "Map link (address card)", widget: string }
+          - { name: google_maps_short_url, label: "Google Maps short link (reviews CTA / hasMap)", widget: string }
+      - name: sheets
+        label: Contact Form Backend
+        widget: object
+        fields:
+          - { name: form_web_app_url, label: "Google Apps Script Web App URL", widget: string }
+      - name: areas_served
+        label: Areas Served (for SEO structured data)
+        widget: list
+        fields:
+          - { name: name, label: "Area name (e.g. Tyler, TX)", widget: string }
+          - { name: same_as, label: "Wikipedia URL (optional)", widget: string, required: false }
+
+  - name: announcement
+    label: Announcement Bar
+    file: src/content/announcement.yml
+    format: yaml
+    icon: campaign
+    fields:
+      - { name: active, label: Active, widget: boolean, default: false }
+      - { name: message, label: Message, widget: string }
+      - { name: link_url, label: Link URL, widget: string, required: false }
+      - { name: link_text, label: Link Text, widget: string, required: false }
+      - { name: start_date, label: Start Date, widget: datetime, required: false }
+      - { name: end_date, label: End Date, widget: datetime, required: false }
+
+  - name: home
+    label: Home Page Sections
+    file: src/content/home.yml
+    format: yaml
+    icon: home
+    fields:
+      - name: blocks
+        label: Sections
+        widget: list
+        summary: "{{fields.type}} — {{fields.heading}}{{fields.title}}"
+        types: &block_types
+          - name: hero
+            label: Hero
+            fields:
+              - { name: badge, label: Badge Text, widget: string, required: false }
+              - { name: title, label: Title, widget: string }
+              - { name: subtitle, label: Subtitle, widget: text }
+          - name: richtext
+            label: Rich Text
+            fields:
+              - { name: id, label: "Anchor ID (optional, no #)", widget: string, required: false }
+              - { name: heading, label: Heading, widget: string, required: false }
+              - { name: body, label: Body, widget: text }
+          - name: services_list
+            label: Services List
+            fields:
+              - { name: id, label: "Anchor ID", widget: string, default: services }
+              - { name: label, label: "Eyebrow label", widget: string, required: false }
+              - { name: heading, label: Heading, widget: string }
+              - { name: subheading, label: Subheading, widget: string, required: false }
+          - name: reviews_list
+            label: Reviews List
+            fields:
+              - { name: id, label: "Anchor ID", widget: string, default: reviews }
+              - { name: label, label: "Eyebrow label", widget: string, required: false }
+              - { name: heading, label: Heading, widget: string }
+              - { name: subheading, label: Subheading, widget: string, required: false }
+          - name: map_location
+            label: Map & Location
+            fields:
+              - { name: id, label: "Anchor ID", widget: string, default: location }
+              - { name: label, label: "Eyebrow label", widget: string, required: false }
+              - { name: heading, label: Heading, widget: string }
+              - { name: subheading, label: Subheading, widget: string, required: false }
+          - name: areas_served
+            label: Areas Served
+            fields:
+              - { name: id, label: "Anchor ID", widget: string, default: areas-served }
+              - { name: label, label: "Eyebrow label", widget: string, required: false }
+              - { name: heading, label: Heading, widget: string }
+              - { name: subheading, label: Subheading, widget: string, required: false }
+              - name: areas
+                label: Areas
+                widget: list
+                field: { name: area, widget: string }
+          - name: cta
+            label: Call To Action
+            fields:
+              - { name: text, label: Text, widget: string }
+              - { name: button_label, label: Button Label, widget: string }
+              - { name: button_link, label: Button Link, widget: string }
+          - name: custom_html
+            label: Custom HTML
+            fields:
+              - { name: html, label: HTML, widget: code, default_language: html }
+
+collections:
+  - name: services
+    label: Services
+    folder: src/content/services
+    create: true
+    extension: yml
+    format: yaml
+    slug: "{{slug}}"
+    identifier_field: name
+    fields:
+      - { name: name, label: Name, widget: string }
+      - { name: description, label: Description, widget: text }
+      - { name: image, label: Image, widget: image, required: false }
+      - { name: order, label: Order, widget: number, default: 10 }
+      - { name: visible, label: Visible, widget: boolean, default: true }
+      - { name: featured, label: "Featured / Highlighted", widget: boolean, default: false }
+
+  - name: reviews
+    label: Reviews
+    folder: src/content/reviews
+    create: true
+    extension: yml
+    format: yaml
+    slug: "{{fields.author}}-{{fields.date}}"
+    identifier_field: author
+    view_filters:
+      filters:
+        - { name: Pending, field: status, pattern: pending }
+        - { name: Approved, field: status, pattern: approved }
+        - { name: Rejected, field: status, pattern: rejected }
+      default: Pending
+    fields:
+      - { name: author, label: Author, widget: string }
+      - { name: rating, label: "Rating (1-5)", widget: number, min: 1, max: 5 }
+      - { name: text, label: Review Text, widget: text }
+      - { name: date, label: Date, widget: string, hint: "e.g. April 2025" }
+      - { name: avatar, label: Avatar URL, widget: string, required: false }
+      - { name: source, label: Source, widget: select, options: [manual, google], default: manual }
+      - { name: status, label: Status, widget: select, options: [pending, approved, rejected], default: pending }
+      - { name: review_url, label: Original Review URL, widget: string, required: false }
+
+  - name: pages
+    label: Pages
+    folder: src/content/pages
+    create: true
+    extension: yml
+    format: yaml
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: slug, label: "URL Slug", widget: string, hint: "e.g. mobile-repair-service — becomes /mobile-repair-service/" }
+      - { name: show_in_nav, label: "Show in Navigation", widget: boolean, default: false }
+      - { name: nav_label, label: "Nav Label", widget: string, required: false }
+      - name: seo
+        label: SEO
+        widget: object
+        fields:
+          - { name: description, label: Meta Description, widget: text }
+          - { name: og_image, label: OG Image, widget: image, required: false }
+          - { name: noindex, label: "Hide from search engines", widget: boolean, default: false }
+      - name: blocks
+        label: Sections
+        widget: list
+        summary: "{{fields.type}}"
+        types: *block_types

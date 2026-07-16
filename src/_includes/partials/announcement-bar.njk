@@ -1,0 +1,10 @@
+{% if announcement.active %}
+<div id="announcementBar" class="announcement-bar">
+  <div class="container announcement-inner">
+    <span>{{ announcement.message }}</span>
+    {% if announcement.link_url %}
+    <a href="{{ announcement.link_url }}" class="announcement-link">{{ announcement.link_text or "Learn more" }}</a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

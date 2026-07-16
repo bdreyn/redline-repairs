@@ -1,0 +1,33 @@
+title: "Mobile Auto Repair in Tyler, TX"
+slug: "mobile-repair-service"
+show_in_nav: true
+nav_label: "Mobile Service"
+seo:
+  description: "Redline Repairs LLC now offers mobile auto repair in Tyler, TX and East Texas. We come to your home or office for oil changes, brakes, diagnostics, and more."
+  og_image: ""
+  noindex: false
+blocks:
+  - type: hero
+    badge: "New Service"
+    title: "We Come To You — Mobile Auto Repair"
+    subtitle: "Can't get to the shop? Our mobile mechanics bring the same honest, quality repair work to your driveway, office, or roadside — anywhere in Tyler and East Texas."
+
+  - type: richtext
+    id: mobile-details
+    heading: "How Mobile Service Works"
+    body: |
+      Give us a call or send a message with your vehicle issue and location.
+      We'll quote the job up front, schedule a time that works for you, and
+      send a mechanic to your home or office with the tools and parts needed
+      to get it done on the spot.
+
+      Mobile service currently covers most routine maintenance and diagnostic
+      work — oil changes, brake inspections and pad replacement, battery
+      testing and replacement, and check-engine-light diagnostics. For larger
+      repairs (transmission, major engine work), we'll recommend bringing the
+      vehicle into the shop.
+
+  - type: cta
+    text: "Ready to schedule mobile service? Tell us where you are and what's going on."
+    button_label: "Request Mobile Service"
+    button_link: "/#contact"

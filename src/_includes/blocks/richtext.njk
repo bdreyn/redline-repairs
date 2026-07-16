@@ -1,0 +1,6 @@
+<section id="{{ block.id or 'richtext' }}">
+  <div class="container mission-inner">
+    {% if block.heading %}<h2>{{ block.heading }}</h2>{% endif %}
+    {{ block.body | nl2p | safe }}
+  </div>
+</section>

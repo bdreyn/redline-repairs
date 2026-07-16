@@ -1,0 +1,6 @@
+name: "Brake Repair & Service"
+description: "From worn brake pads to rotor resurfacing, our mechanics diagnose and fix your brake system right. Don't wait — safe stopping is non-negotiable."
+image: "/images/brakes.webp"
+order: 20
+visible: true
+featured: false

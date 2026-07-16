@@ -1,0 +1,6 @@
+name: "AC Repair & Recharge"
+description: "East Texas summers are brutal. We diagnose AC problems, recharge refrigerant, and repair compressors and leaks to keep you cool on the road."
+image: "/images/air-conditioning-repair.webp"
+order: 50
+visible: true
+featured: false
