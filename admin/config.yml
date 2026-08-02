@@ -4,9 +4,7 @@ backend:
   # NOTE: points at the review branch during Phase G testing.
   # Change to `main` at cutover (see plan Phase G, step 6).
   branch: sveltia-cms
-  # NOTE: placeholder — replace with your deployed sveltia-cms-auth Worker URL
-  # (see plan Phase C.1), e.g. https://sveltia-cms-auth.<you>.workers.dev
-  base_url: https://REPLACE-ME.workers.dev
+  base_url: https://sveltia-cms-auth.bdreyn.workers.dev
 
 site_url: https://www.redlinerepairsllc.com
 
