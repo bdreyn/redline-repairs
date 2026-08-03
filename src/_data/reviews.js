@@ -1,10 +1,11 @@
-import { readFileSync, globSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import yaml from "js-yaml";
 
 export default function () {
-  const files = globSync("src/content/reviews/*.yml");
+  const dir = "src/content/reviews";
+  const files = readdirSync(dir).filter((f) => f.endsWith(".yml"));
   const approved = files
-    .map((file) => yaml.load(readFileSync(file, "utf8")))
+    .map((file) => yaml.load(readFileSync(`${dir}/${file}`, "utf8")))
     .filter((review) => review.status === "approved")
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
