@@ -1,58 +1,52 @@
-site_url: "https://www.redlinerepairsllc.com"
-logo: "/images/logo-white.png"
-
+site_url: https://www.redlinerepairsllc.com
+logo: /images/logo-white.png
 seo:
-  title: "Auto Repair Tyler TX | Redline Repairs LLC | (903) 330-5749"
-  description: "Trusted auto repair shop in Tyler, TX. Oil changes, brake repair, engine diagnostics & more. Honest pricing, transparent quotes. Call (903) 330-5749 today!"
-
+  title: Auto Repair Tyler TX | Redline Repairs LLC | (903) 330-5749
+  description: Trusted auto repair shop in Tyler, TX. Oil changes, brake repair, engine diagnostics & more. Honest pricing, transparent quotes. Call (903) 330-5749 today!
 business:
-  name: "Redline Repairs LLC"
-  tagline: "Premium Auto Repair You Can Trust"
-  phone: "(903) 330-5749"
-  phone_tel: "+19033305749"
-  email: "redlinerepairsllc@icloud.com"
-  address_line1: "6252 Rhones Quarter Rd"
-  address_line2: "Tyler, Texas 75707"
-  street_address: "6252 Rhones Quarter Rd #2B"
-  city: "Tyler"
-  region: "TX"
-  postal_code: "75707"
-  country: "US"
+  name: Redline Repairs LLC
+  tagline: Premium Auto Repair You Can Trust
+  phone: (903) 330-5749
+  phone_tel: '+19033305749'
+  email: redlinerepairsllc@icloud.com
+  address_line1: 6252 Rhones Quarter Rd
+  address_line2: Tyler, Texas 75707
+  street_address: '6252 Rhones Quarter Rd #2B'
+  city: Tyler
+  region: TX
+  postal_code: '75707'
+  country: US
   hours:
-    mon_fri: "9:00 AM - 6:00 PM"
-    saturday: "By Appointment"
-    sunday: "Closed"
+    mon_fri: 9:00 AM - 6:00 PM
+    saturday: By Appointment
+    sunday: Closed
   social:
-    facebook: "https://www.facebook.com/RedlineRepairsLLC"
-    instagram: "https://www.instagram.com/redlinerepairsllc"
-
-square_booking_url: "k8y6rrsbcp4q3z/LHR8XX3V8EAJM"
-
+    facebook: https://www.facebook.com/RedlineRepairsLLC
+    instagram: https://www.instagram.com/redlinerepairsllc
+square_booking_url: ''
 map:
-  embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3373.1770729676596!2d-95.26384802371042!3d32.28021690920787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8649cde7bf2db199%3A0x8f4d4abd3499a964!2sRedline%20Repairs%20LLC!5e0!3m2!1sen!2sus!4v1779410645325!5m2!1sen!2sus"
-  lat: 32.28036657487671
-  lng: -95.26082249212608
-  fallback_url: "https://maps.google.com/?q=6252+Rhones+Quarter+Rd+Tyler+TX+75707"
-  address_url: "https://maps.google.com/?q=6252+Rhones+Quarter+Rd+2B+Tyler+TX+75707"
-  google_maps_short_url: "https://maps.app.goo.gl/yF8QgXuejdSoJN5t7"
-
+  embed_url: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3373.1770729676596!2d-95.26384802371042!3d32.28021690920787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8649cde7bf2db199%3A0x8f4d4abd3499a964!2sRedline%20Repairs%20LLC!5e0!3m2!1sen!2sus!4v1779410645325!5m2!1sen!2sus
+  lat: 32
+  lng: -95
+  fallback_url: https://maps.google.com/?q=6252+Rhones+Quarter+Rd+Tyler+TX+75707
+  address_url: https://maps.google.com/?q=6252+Rhones+Quarter+Rd+2B+Tyler+TX+75707
+  google_maps_short_url: https://maps.app.goo.gl/yF8QgXuejdSoJN5t7
 sheets:
-  form_web_app_url: "https://script.google.com/macros/s/AKfycbzC4LayBQzLZLZg9M2IRCSY-kcJ8pCM7GjL_Iy6l8ew3gLn_KUY6BK4_-7EAJ3HpUiW/exec"
-
+  form_web_app_url: https://script.google.com/macros/s/AKfycbzC4LayBQzLZLZg9M2IRCSY-kcJ8pCM7GjL_Iy6l8ew3gLn_KUY6BK4_-7EAJ3HpUiW/exec
 areas_served:
-  - name: "Tyler, TX"
-    same_as: "https://en.wikipedia.org/wiki/Tyler,_Texas"
-  - name: "Longview, TX"
-    same_as: "https://en.wikipedia.org/wiki/Longview,_Texas"
-  - name: "Lindale, TX"
-    same_as: "https://en.wikipedia.org/wiki/Lindale,_Texas"
-  - name: "Whitehouse, TX"
-    same_as: "https://en.wikipedia.org/wiki/Whitehouse,_Texas"
-  - name: "Flint, TX"
-    same_as: "https://en.wikipedia.org/wiki/Flint,_Texas"
-  - name: "Bullard, TX"
-    same_as: ""
-  - name: "Troup, TX"
-    same_as: ""
-  - name: "Jacksonville, TX"
-    same_as: "https://en.wikipedia.org/wiki/Jacksonville,_Texas"
+  - name: Tyler, TX
+    same_as: https://en.wikipedia.org/wiki/Tyler,_Texas
+  - name: Longview, TX
+    same_as: https://en.wikipedia.org/wiki/Longview,_Texas
+  - name: Lindale, TX
+    same_as: https://en.wikipedia.org/wiki/Lindale,_Texas
+  - name: Whitehouse, TX
+    same_as: https://en.wikipedia.org/wiki/Whitehouse,_Texas
+  - name: Flint, TX
+    same_as: https://en.wikipedia.org/wiki/Flint,_Texas
+  - name: Bullard, TX
+    same_as: ''
+  - name: Troup, TX
+    same_as: ''
+  - name: Jacksonville, TX
+    same_as: https://en.wikipedia.org/wiki/Jacksonville,_Texas
