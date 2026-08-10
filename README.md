@@ -1,217 +1,131 @@
-# Redline Repairs LLC — Static Site
+# Redline Repairs LLC — Site
 
-A clean, fast static site for GitHub Pages.  
-**No build step. No Netlify. No Supabase.** Just HTML, CSS, and vanilla JS.
-
----
+A static site for [www.redlinerepairsllc.com](https://www.redlinerepairsllc.com), built with **Eleventy**
+and edited through **Sveltia CMS**. Hosted on **GitHub Pages**, built by **GitHub Actions**.
 
 ## Stack
 
-| Layer       | Technology                         | Cost  |
-|-------------|-------------------------------------|-------|
-| Hosting     | GitHub Pages                        | Free  |
-| Database    | Google Sheets (published CSV)       | Free  |
-| Form inbox  | Google Apps Script Web App          | Free  |
-| Payments    | Square Appointments (embedded)      | Free  |
-| Map         | Google Maps JS API                  | Free* |
-| Domain      | Your existing Square domain (CNAME) | Existing |
+| Layer            | Technology                                          | Cost  |
+|-------------------|-----------------------------------------------------|-------|
+| Static site build | [Eleventy](https://www.11ty.dev/) (Nunjucks templates) | Free  |
+| Hosting           | GitHub Pages, deployed via GitHub Actions           | Free  |
+| Content editing   | [Sveltia CMS](https://github.com/sveltia/sveltia-cms) (GitHub backend) | Free  |
+| CMS login         | Shared Cloudflare Worker OAuth proxy (`sveltia-cms-auth`) | Free  |
+| Contact form      | Google Apps Script Web App → Google Sheet           | Free  |
+| Reviews import    | Google Places API (New), scheduled GitHub Action    | Low/free |
+| Preview builds    | Cloudflare Pages, auto-deployed from `sveltia-cms` branch | Free  |
 
-*Google Maps has a monthly free tier ($200/month credit) — far more than enough for a small business site.
-
----
-
-## File Structure
+## File structure
 
 ```
 redline-repairs/
-├── index.html              ← Single-page site
-├── css/
-│   └── styles.css          ← All styling
-├── js/
-│   ├── config.js           ← ⬅ Edit this first — all settings here
-│   ├── app.js              ← App logic (don't need to touch)
-│   └── sheets-appscript.js ← Paste into Google Apps Script
-└── README.md
+├── admin/                      ← Sveltia CMS
+│   ├── index.html              ← loads the CMS bundle
+│   └── config.yml              ← content model: collections, singletons, fields
+├── src/
+│   ├── content/                ← everything the CMS edits, lives here
+│   │   ├── site.yml            ← business info, hours, map, contact-form URL, security
+│   │   ├── announcement.yml    ← top-of-site announcement bar
+│   │   ├── home.yml            ← homepage sections (ordered list of blocks)
+│   │   ├── services/*.yml      ← one file per service
+│   │   ├── reviews/*.yml       ← one file per review (status: pending/approved/rejected)
+│   │   └── pages/*.yml         ← additional standalone pages (also block-based)
+│   ├── _data/                  ← loads src/content/*.yml into Eleventy's data cascade
+│   ├── _includes/
+│   │   ├── layouts/base.njk    ← <head>, nav, footer, JSON-LD, wraps every page
+│   │   ├── partials/           ← nav, footer, announcement bar, JSON-LD
+│   │   └── blocks/             ← one template per section "type" (hero, services_list, etc.)
+│   ├── css/style.css
+│   ├── js/app.js               ← nav, map embed, contact form submit, back-to-top
+│   ├── images/
+│   ├── index.njk                ← renders home.yml's blocks
+│   └── pages.njk                ← renders each entry in content/pages/*.yml
+├── js/sheets-appscript.js       ← paste into Google Apps Script (not part of the site build)
+├── scripts/import-reviews.mjs   ← pulls new Google reviews into content/reviews/ as "pending"
+├── .github/workflows/
+│   ├── build-deploy.yml         ← builds + deploys to GitHub Pages on push to main
+│   ├── preview-deploy.yml       ← builds + deploys to Cloudflare Pages on push to sveltia-cms
+│   └── import-reviews.yml       ← scheduled Google review import (currently paused, see below)
+├── eleventy.config.js
+└── package.json
 ```
 
----
-
-## Quick Start
-
-### 1. Upload to GitHub
+## Local development
 
 ```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/YOUR_USER/redline-repairs.git
-git push -u origin main
+npm install
+npm run dev      # eleventy --serve, live-reloads at http://localhost:8080
+npm run build    # outputs the static site to _site/
 ```
 
-Then in GitHub → Settings → Pages → Source: **Deploy from branch** → `main` → `/ (root)`.
+No API keys or secrets are required to build or preview the site locally — all content lives in
+`src/content/*.yml` as plain files.
 
-Your site will be live at `https://YOUR_USER.github.io/redline-repairs/`
+## Editing content
 
----
+Go to `/admin/` on the live site (or a preview deploy) and log in with GitHub. You'll need write
+access to this repo. Sveltia CMS commits your changes directly to git; the next build picks them up
+automatically.
 
-### 2. Edit `js/config.js`
+- **Business info, hours, map, logo, contact-form URL, security settings** → *Site Settings* singleton
+- **Announcement bar** (e.g. highlighting a new service) → *Announcement Bar* singleton
+- **Homepage layout** — reorder, add, or remove sections → *Home Page Sections* singleton
+- **Services** → *Services* collection (`featured: true` highlights one, e.g. for a promo)
+- **Reviews** → *Reviews* collection — defaults to showing **Pending** entries first; flip `status`
+  to `approved` to publish one, `rejected` to discard it. Only `approved` reviews render on the site.
+- **New pages** → *Pages* collection — give it a `slug`, toggle `show_in_nav`, and compose it from the
+  same section types as the homepage. Publishes at `/<slug>/`.
 
-Open `js/config.js` and fill in the blanks. That file controls everything — business info, API keys, Square URL, Sheets URLs.
+## Deployment
 
----
+- **Production**: push to `main` → `.github/workflows/build-deploy.yml` builds with Eleventy and
+  deploys to GitHub Pages.
+- **Preview**: push to `sveltia-cms` (or whatever branch is under active development) →
+  `.github/workflows/preview-deploy.yml` deploys to `https://redline-repairs-preview.pages.dev` via
+  Cloudflare Pages. Use this to review changes before merging to `main`.
 
-## Google Sheets Backend
+## Contact form
 
-### Step 1 — Create the Sheet
+The form posts to a Google Apps Script Web App (`js/sheets-appscript.js`, pasted manually into the
+Apps Script editor for the target Google Sheet — see the setup notes at the top of that file). It
+writes to an "Inquiries" tab and emails a notification. This is independent of the Eleventy/CMS
+rework and isn't touched by a normal content edit or site rebuild.
 
-1. Go to [sheets.google.com](https://sheets.google.com) and create a new spreadsheet.
-2. Name it **Redline Repairs CMS**.
-3. Create these tabs (exact names matter):
+**Spam protection**, in order: a hidden honeypot field, a client-side minimum-time check, and
+(optional, recommended) [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/),
+verified **server-side** in the Apps Script so a scripted request can't just skip the site's JS and
+POST straight to the Web App URL. To turn Turnstile on:
 
-#### Tab: `Services`
-| name | description | imageUrl | order | visible |
-|------|-------------|----------|-------|---------|
-| Oil Change | Full synthetic oil change... | https://... | 1 | TRUE |
+1. Create a Turnstile widget in the Cloudflare dashboard for your domain(s) → get a site key + secret key.
+2. Site Settings → Security → paste the **site key** (public) in the CMS.
+3. In the Apps Script project: **Project Settings → Script Properties** → add
+   `TURNSTILE_SECRET_KEY` = the **secret key**.
+4. Re-paste `js/sheets-appscript.js` into the Apps Script editor if it's changed, then
+   **Deploy → Manage deployments → Edit → New version**.
 
-#### Tab: `Reviews`
-| author | rating | text | date | avatar | visible |
-|--------|--------|------|------|--------|---------|
-| Marcus T. | 5 | Great shop! | April 2025 | | TRUE |
+Leaving the site key blank keeps the form working exactly as before, with no Turnstile challenge.
 
-#### Tab: `Mission`
-| heading | paragraph |
-|---------|-----------|
-| Our Mission | At Redline Repairs... |
+## Reviews import
 
-#### Tab: `Inquiries`
-*(Leave this blank — the Apps Script will add the header row automatically.)*
+`scripts/import-reviews.mjs` calls the Google Places API (New) for up to ~5 "most relevant" reviews
+per place — that's a hard limit Google's API imposes, not something this script can work around.
+New reviews land as `content/reviews/google-<hash>.yml` with `status: pending`; it never touches a
+file that already exists, so an owner's moderation decision is never overwritten by a re-run.
 
----
+The scheduled run (`.github/workflows/import-reviews.yml`) is currently **paused** (cron commented
+out) until `GOOGLE_PLACES_API_KEY` and `GOOGLE_PLACE_ID` repo secrets are set — `workflow_dispatch`
+still works for a manual test run. To enable:
 
-### Step 2 — Publish Sheets as CSV
+1. Google Cloud Console: create/select a project, enable billing, enable **Places API (New)**.
+2. Create an API key restricted to **Places API (New)** only (no application/IP restriction —
+   GitHub Actions runner IPs aren't fixed).
+3. Add repo secrets `GOOGLE_PLACES_API_KEY` and `GOOGLE_PLACE_ID`.
+4. Uncomment the `schedule:` block in `.github/workflows/import-reviews.yml`.
 
-For the **Services**, **Reviews**, and **Mission** tabs:
+## CMS login (GitHub OAuth)
 
-1. **File → Share → Publish to web**
-2. Select the tab (e.g., "Services")
-3. Format: **Comma-separated values (.csv)**
-4. Click **Publish** → copy the URL
-5. Paste into `js/config.js` under `sheets.servicesUrl` / `sheets.reviewsUrl` / `sheets.missionUrl`
-
-> **Important:** Each tab needs its own published URL.
-
----
-
-### Step 3 — Set Up Contact Form (Apps Script)
-
-1. In your Google Sheet: **Extensions → Apps Script**
-2. Delete any existing code in the editor
-3. Copy the entire contents of `js/sheets-appscript.js` and paste it in
-4. Click **Save** (floppy disk icon)
-5. Click **Deploy → New deployment**
-   - Type: **Web app**
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-6. Click **Deploy** → authorize the permissions
-7. Copy the **Web App URL** (looks like `https://script.google.com/macros/s/.../exec`)
-8. Paste it into `js/config.js` → `sheets.formWebAppUrl`
-
-**Test it:** In Apps Script, select the `testSetup` function and click ▶ Run. You should see a new row appear in the Inquiries tab.
-
----
-
-## Square Booking Integration
-
-1. In Square Dashboard → **Appointments → Settings → Online Booking**
-2. Under **Booking Website**, click **Share booking site** or look for the **Widget** embed option
-3. The booking URL looks like:  
-   `https://squareup.com/appointments/buyer/widget/XXXXX/YYYYY`
-4. Paste that URL into `js/config.js` → `square.bookingUrl`
-
-The "Book Now" button will open a modal with the Square booking calendar embedded.
-
----
-
-## Google Maps Setup
-
-### Option A — API Key (recommended)
-1. Go to [console.cloud.google.com](https://console.cloud.google.com)
-2. Create a project → Enable **Maps JavaScript API**
-3. Create an API key → **Restrict it to your domain** (e.g., `*.github.io/redline-repairs/*`)
-4. Paste key into `js/config.js` → `google.mapsApiKey`
-
-### Option B — Embed URL (no key needed)
-1. Go to [maps.google.com](https://maps.google.com) → search your address
-2. Click **Share → Embed a map** → copy the `src` URL from the iframe code
-3. Paste into `js/config.js` → `mapEmbedUrl`
-4. Leave `google.mapsApiKey` blank
-
----
-
-## Google API Security (Domain Restriction)
-
-**You must restrict your API keys to prevent unauthorized use.**
-
-### Maps JavaScript API Key
-1. [console.cloud.google.com](https://console.cloud.google.com) → Credentials → click your key
-2. Under **Application restrictions** → **HTTP referrers (websites)**
-3. Add these referrers:
-   ```
-   https://YOUR_USER.github.io/*
-   https://www.redlinerepairsllc.com/*
-   https://redlinerepairsllc.com/*
-   ```
-4. Under **API restrictions** → **Restrict key** → select **Maps JavaScript API**
-5. Save
-
-### Places API Key (if used)
-Same process, restrict to **Places API** only.
-
-> **Note:** Keys stored in `config.js` are visible in the browser. Restricting by HTTP referrer is the correct mitigation — an exposed key restricted to your domain can only be used to load maps *on your domain*.
-
----
-
-## Custom Domain (redlinerepairsllc.com)
-
-To point your existing domain to GitHub Pages instead of Square:
-
-1. In GitHub → Settings → Pages → **Custom domain** → enter `www.redlinerepairsllc.com`
-2. In your DNS provider, add:
-   ```
-   Type: CNAME
-   Name: www
-   Value: YOUR_USER.github.io
-   ```
-3. For the apex domain (`redlinerepairsllc.com`), add four A records:
-   ```
-   185.199.108.153
-   185.199.109.153
-   185.199.110.153
-   185.199.111.153
-   ```
-4. Check **Enforce HTTPS** in GitHub Pages settings once DNS propagates (~24 hrs)
-
----
-
-## Updating Content
-
-### Services / Reviews / Mission
-Edit directly in your Google Sheet. Changes appear on the site within a minute (CSV is re-fetched on each page load). No deployment needed.
-
-### Site info (phone, hours, address, etc.)
-Edit `js/config.js` → commit and push to GitHub. GitHub Pages rebuilds automatically.
-
-### Styling
-Edit `css/styles.css` → commit and push.
-
----
-
-## Removing the Old Supabase / Netlify Setup
-
-The original Bolt/Vite/React codebase is no longer needed. This replacement:
-- Has no npm dependencies
-- Has no build step
-- Loads in under 2 seconds on mobile
-- Costs $0/month to host
-
-You can archive or delete the original GitHub repo, or simply replace its contents with these files.
+Sveltia CMS's GitHub backend needs a token-exchange proxy, since GitHub OAuth requires a
+confidential client secret. `admin/config.yml`'s `backend.base_url` points at an existing
+Cloudflare Worker (`sveltia-cms-auth`) already used for other sites — the same GitHub OAuth App and
+Worker can serve any number of repos; the only per-site setting is the Worker's `ALLOWED_DOMAINS`
+env var, which needs each new domain appended (not replacing existing ones).
