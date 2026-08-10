@@ -12,7 +12,17 @@
  *       Execute as: Me
  *       Who has access: Anyone
  *    6. Click Deploy → copy the Web App URL
- *    7. Paste that URL into js/config.js → sheets.formWebAppUrl
+ *    7. Paste that URL into the CMS's Site Settings → Contact Form Backend
+ *
+ *  Optional — Cloudflare Turnstile (recommended, closes the gap where a bot
+ *  could POST directly to this Web App URL, skipping the site's JS checks):
+ *    1. Create a Turnstile widget at the Cloudflare dashboard.
+ *    2. Put the *site* key into the CMS's Site Settings → Security field.
+ *    3. In this Apps Script project: Project Settings (gear icon) → Script
+ *       Properties → add TURNSTILE_SECRET_KEY = <your Turnstile secret key>.
+ *    4. Redeploy (Deploy → Manage deployments → Edit → New version).
+ *    Leave TURNSTILE_SECRET_KEY unset to skip verification (matches the
+ *    site behaving as if Turnstile weren't configured).
  *
  *  Sheet tabs expected:
  *    "Inquiries"  — form submissions land here
@@ -43,6 +53,15 @@ function doPost(e) {
         .setMimeType(ContentService.MimeType.JSON);
     }
 
+    // Server-side Turnstile verification — only enforced if a secret key is
+    // configured, so the form keeps working before Turnstile is set up.
+    if (!verifyTurnstile(data['cf-turnstile-response'])) {
+      Logger.log('Turnstile verification failed — submission blocked.');
+      return ContentService
+        .createTextOutput(JSON.stringify({ success: false, error: 'Verification failed. Please try again.' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     // Rate limit: reject if same email submitted within the last 5 minutes
     if (isRateLimited(data.email)) {
       Logger.log('Rate limit triggered for: ' + data.email);
@@ -61,6 +80,31 @@ function doPost(e) {
     return ContentService
       .createTextOutput(JSON.stringify({ success: false, error: err.message }))
       .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * Verifies a Cloudflare Turnstile token server-side against Cloudflare's API.
+ * Returns true (pass-through) if TURNSTILE_SECRET_KEY isn't configured, so
+ * the form isn't broken before Turnstile is set up.
+ */
+function verifyTurnstile(token) {
+  const secret = PropertiesService.getScriptProperties().getProperty('TURNSTILE_SECRET_KEY');
+  if (!secret) return true; // Turnstile not configured yet — don't block submissions
+
+  if (!token) return false; // configured, but no token was submitted
+
+  try {
+    const res = UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'post',
+      payload: { secret: secret, response: token },
+      muteHttpExceptions: true,
+    });
+    const result = JSON.parse(res.getContentText());
+    return result.success === true;
+  } catch (err) {
+    Logger.log('Turnstile verification error: ' + err.message);
+    return false; // fail closed — if we can't verify, don't accept the submission
   }
 }
 

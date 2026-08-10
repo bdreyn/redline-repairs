@@ -78,6 +78,11 @@ singletons:
         widget: object
         fields:
           - { name: form_web_app_url, label: "Google Apps Script Web App URL", widget: string }
+      - name: security
+        label: Security
+        widget: object
+        fields:
+          - { name: turnstile_site_key, label: "Cloudflare Turnstile Site Key (public)", widget: string, required: false, hint: "From the Cloudflare Turnstile dashboard. Leave blank to disable the contact form challenge." }
       - name: areas_served
         label: Areas Served (for SEO structured data)
         widget: list

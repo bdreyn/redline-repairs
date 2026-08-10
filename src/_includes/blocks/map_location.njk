@@ -94,6 +94,10 @@
             <input type="text" id="fwebsite" name="website" tabindex="-1" autocomplete="off" />
           </div>
 
+          {% if site.security.turnstile_site_key %}
+          <div class="cf-turnstile" data-sitekey="{{ site.security.turnstile_site_key }}"></div>
+          {% endif %}
+
           <button type="submit" class="btn-submit" id="submitBtn">
             <i data-lucide="send"></i> Send Message
           </button>

@@ -26,7 +26,7 @@
   <meta name="twitter:description" content="{{ pageDescription or site.seo.description }}" />
 
   <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://raw.githubusercontent.com https://images.pexels.com https://*.gstatic.com data: blob:; frame-src https://www.google.com https://maps.google.com; connect-src 'self' https://*.google.com https://*.googleapis.com https://*.googleusercontent.com;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://cdn.jsdelivr.net https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' https://raw.githubusercontent.com https://images.pexels.com https://*.gstatic.com data: blob:; frame-src https://www.google.com https://maps.google.com https://challenges.cloudflare.com; connect-src 'self' https://*.google.com https://*.googleapis.com https://*.googleusercontent.com https://challenges.cloudflare.com;" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
@@ -36,6 +36,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" crossorigin="anonymous"></script>
+  {% if site.security.turnstile_site_key %}
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  {% endif %}
 
   <link rel="stylesheet" href="/css/style.css" />
 
@@ -65,7 +68,8 @@
     mapEmbedUrl: {{ site.map.embed_url | dump | safe }},
     sheets: {
       formWebAppUrl: {{ site.sheets.form_web_app_url | dump | safe }}
-    }
+    },
+    turnstileSiteKey: {{ site.security.turnstile_site_key | dump | safe }}
   };
 </script>
 <script src="/js/app.js"></script>

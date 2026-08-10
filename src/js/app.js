@@ -112,10 +112,17 @@ function requestService(serviceName) {
 function initMap() {
   const mapDiv = document.getElementById('map');
   const fallback = document.getElementById('mapFallback');
-  mapDiv.innerHTML = `<iframe
-    src="${SITE_CONFIG.mapEmbedUrl}"
-    width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+  // Built via DOM properties (not innerHTML/string concat) so the CMS-editable
+  // embed URL can never be parsed as HTML, even if it contained markup.
+  const iframe = document.createElement('iframe');
+  iframe.src = SITE_CONFIG.mapEmbedUrl;
+  iframe.width = '100%';
+  iframe.height = '100%';
+  iframe.style.border = '0';
+  iframe.allowFullscreen = true;
+  iframe.loading = 'lazy';
+  iframe.referrerPolicy = 'no-referrer-when-downgrade';
+  mapDiv.replaceChildren(iframe);
   fallback.style.display = 'none';
 }
 
@@ -143,6 +150,14 @@ async function submitInquiry(e) {
   // Minimum time check — reject submissions faster than 3 seconds (bots)
   if (Date.now() - _pageLoadTime < 3000) {
     errorEl.textContent = 'Please take a moment to review your message before sending.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  // Turnstile challenge — only enforced client-side when configured; the
+  // Apps Script backend independently re-verifies the token server-side.
+  if (SITE_CONFIG.turnstileSiteKey && !data['cf-turnstile-response']) {
+    errorEl.textContent = 'Please complete the verification challenge before sending.';
     errorEl.style.display = 'block';
     return;
   }
