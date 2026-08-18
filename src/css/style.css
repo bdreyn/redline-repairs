@@ -548,6 +548,18 @@ h3 { font-size: 1.5rem; color: var(--primary); }
   margin-bottom: 2.5rem;
 }
 
+#areas-served .section-header h2 {
+  color: var(--white);
+}
+
+#areas-served .section-header p {
+  color: var(--gray-400);
+}
+
+#areas-served .areas-note a {
+  color: var(--accent-h, #e63946);
+}
+
 .areas-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
