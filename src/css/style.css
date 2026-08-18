@@ -557,7 +557,7 @@ h3 { font-size: 1.5rem; color: var(--primary); }
 }
 
 #areas-served .areas-note a {
-  color: var(--accent-h, #e63946);
+  color: var(--white);
 }
 
 .areas-grid {
