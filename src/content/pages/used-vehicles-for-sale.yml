@@ -1,0 +1,13 @@
+title: Used Vehicles for Sale
+slug: used-vehicles-for-sale
+show_in_nav: true
+nav_label: Used Vehicles
+seo:
+  description: Used vehicles for sale
+  og_image: ''
+  noindex: false
+blocks:
+  - type: richtext
+    id: ''
+    heading: Coupes and Sedans
+    body: Used coupes and sedans, running or not running
