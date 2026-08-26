@@ -18,7 +18,7 @@ business:
   country: US
   hours:
     mon_fri: 9:00 AM - 5:00 PM
-    saturday: By Appointment
+    saturday: Closed
     sunday: Closed
   social:
     facebook: https://www.facebook.com/RedlineRepairsLLC
@@ -26,8 +26,8 @@ business:
 square_booking_url: ''
 map:
   embed_url: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3373.1770729676596!2d-95.26384802371042!3d32.28021690920787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8649cde7bf2db199%3A0x8f4d4abd3499a964!2sRedline%20Repairs%20LLC!5e0!3m2!1sen!2sus!4v1779410645325!5m2!1sen!2sus
-  lat: 32.28036657487671
-  lng: -95.26082249212608
+  lat: 32
+  lng: -95
   fallback_url: https://maps.google.com/?q=6252+Rhones+Quarter+Rd+Tyler+TX+75707
   address_url: https://maps.google.com/?q=6252+Rhones+Quarter+Rd+2B+Tyler+TX+75707
   google_maps_short_url: https://maps.app.goo.gl/yF8QgXuejdSoJN5t7
