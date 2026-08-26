@@ -1,10 +1,8 @@
 name: Import Google Reviews
 
 on:
-  # Cron paused until GOOGLE_PLACES_API_KEY / GOOGLE_PLACE_ID secrets are set —
-  # re-enable by uncommenting once the Places API key is available.
-  # schedule:
-  #   - cron: '17 13 * * *'
+  schedule:
+    - cron: '17 13 * * *'
   workflow_dispatch:
 
 permissions:
