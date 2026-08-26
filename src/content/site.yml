@@ -17,7 +17,7 @@ business:
   postal_code: '75707'
   country: US
   hours:
-    mon_fri: 9:00 AM - 6:00 PM
+    mon_fri: 9:00 AM - 5:00 PM
     saturday: By Appointment
     sunday: Closed
   social:
@@ -34,8 +34,6 @@ map:
 sheets:
   form_web_app_url: https://script.google.com/macros/s/AKfycbzC4LayBQzLZLZg9M2IRCSY-kcJ8pCM7GjL_Iy6l8ew3gLn_KUY6BK4_-7EAJ3HpUiW/exec
 security:
-  # Public site key from your Cloudflare Turnstile widget (safe to expose).
-  # Leave blank to disable the challenge on the contact form.
   turnstile_site_key: ''
 areas_served:
   - name: Tyler, TX
