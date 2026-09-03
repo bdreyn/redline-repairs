@@ -126,6 +126,9 @@ function requestService(serviceName) {
 function initMap() {
   const mapDiv = document.getElementById('map');
   const fallback = document.getElementById('mapFallback');
+  // Not every page has a map_location block (e.g. pages built without one) —
+  // bail out quietly rather than throwing and halting the rest of init.
+  if (!mapDiv || !fallback) return;
   // Built via DOM properties (not innerHTML/string concat) so the CMS-editable
   // embed URL can never be parsed as HTML, even if it contained markup.
   const iframe = document.createElement('iframe');

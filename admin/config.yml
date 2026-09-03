@@ -167,7 +167,7 @@ singletons:
           - name: custom_html
             label: Custom HTML
             fields:
-              - { name: html, label: HTML, widget: code, default_language: html }
+              - { name: html, label: HTML, widget: code, default_language: html, output_code_only: true }
 
 collections:
   - name: services

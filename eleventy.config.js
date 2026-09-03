@@ -8,7 +8,7 @@ export default function (eleventyConfig) {
         .replace(/>/g, "&gt;");
     return String(value)
       .split(/\n\s*\n/)
-      .map((para) => `<p>${escape(para.trim())}</p>`)
+      .map((para) => `<p>${escape(para.trim()).replace(/\n/g, "<br>")}</p>`)
       .join("\n");
   });
 

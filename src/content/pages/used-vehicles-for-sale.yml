@@ -14,20 +14,18 @@ blocks:
       Looking for a reliable used car without the dealership runaround? At Redline Repairs LLC, we now offer a small selection of pre-owned vehicles that have been inspected by the same technicians who repair cars every day.
       Because we see what’s really going on under the hood, we only list vehicles we’re comfortable standing behind. No pressure, no gimmicks — just straightforward cars at fair prices for drivers in Tyler and East Texas.
   - type: custom_html
-    html:
-      lang: html
-      code: |-
-        <h2>Why Buy a Used Car From Redline Repairs?</h2>
+    html: |-
+      <h2>Why Buy a Used Car From Redline Repairs?</h2>
 
-        <ul>
-        <li>Thorough multi-point inspection by our own mechanics</li>
-        <li>Honest condition reports — we tell you what we know</li>
-        <li>Transparent pricing with no hidden fees</li>
-        <li>Local ownership and personal service</li>
-        <li>Convenient location at 6252 Rhones Quarter Rd, Tyler</li>
-        </ul>
+      <ul>
+      <li>Thorough multi-point inspection by our own mechanics</li>
+      <li>Honest condition reports — we tell you what we know</li>
+      <li>Transparent pricing with no hidden fees</li>
+      <li>Local ownership and personal service</li>
+      <li>Convenient location at 6252 Rhones Quarter Rd, Tyler</li>
+      </ul>
 
-        <p>Whether you need a daily driver, a work vehicle, or something affordable to get back on the road, we’re here to help.</p>
+      <p>Whether you need a daily driver, a work vehicle, or something affordable to get back on the road, we’re here to help.</p>
   - type: richtext
     id: ''
     heading: ''

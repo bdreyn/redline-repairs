@@ -1,5 +1,5 @@
 <section class="custom-html-block">
   <div class="container">
-    {{ block.html | safe }}
+    {{ (block.html.code if block.html.code else block.html) | safe }}
   </div>
 </section>
