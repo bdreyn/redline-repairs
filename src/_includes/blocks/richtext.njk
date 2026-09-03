@@ -1,8 +1,11 @@
 {% set headingTag = block.heading_level if block.heading_level in ["h2", "h3", "h4"] else "h2" %}
-{% set align = block.align if block.align in ["left", "center", "right"] else "center" %}
+{% set headingAlign = block.heading_align if block.heading_align in ["left", "center", "right"] else "center" %}
+{% set bodyAlign = block.body_align if block.body_align in ["left", "center", "right"] else "center" %}
 <section id="{{ block.id or 'richtext' }}" class="richtext-section">
-  <div class="container mission-inner align-{{ align }}">
-    {% if block.heading %}<{{ headingTag }}>{{ block.heading }}</{{ headingTag }}>{% endif %}
-    {{ block.body | markdown | safe }}
+  <div class="container mission-inner">
+    {% if block.heading %}<{{ headingTag }} class="text-{{ headingAlign }}">{{ block.heading }}</{{ headingTag }}>{% endif %}
+    <div class="text-{{ bodyAlign }}">
+      {{ block.body | markdown | safe }}
+    </div>
   </div>
 </section>

@@ -50,14 +50,14 @@
 
     if (type === "richtext") {
       var tag = ["h2", "h3", "h4"].indexOf(block.heading_level) !== -1 ? block.heading_level : "h2";
-      var align = ["left", "center", "right"].indexOf(block.align) !== -1 ? block.align : "center";
+      var headingAlign = ["left", "center", "right"].indexOf(block.heading_align) !== -1 ? block.heading_align : "center";
+      var bodyAlign = ["left", "center", "right"].indexOf(block.body_align) !== -1 ? block.body_align : "center";
       return (
-        '<section class="richtext-section"><div class="container mission-inner align-' +
-        align +
-        '">' +
-        (block.heading ? "<" + tag + ">" + esc(block.heading) + "</" + tag + ">" : "") +
+        '<section class="richtext-section"><div class="container mission-inner">' +
+        (block.heading ? "<" + tag + ' class="text-' + headingAlign + '">' + esc(block.heading) + "</" + tag + ">" : "") +
+        '<div class="text-' + bodyAlign + '">' +
         md.render(block.body || "") +
-        "</div></section>"
+        "</div></div></section>"
       );
     }
 

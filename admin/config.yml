@@ -126,7 +126,8 @@ singletons:
               - { name: id, label: "Anchor ID (optional, no #)", widget: string, required: false }
               - { name: heading, label: Heading, widget: string, required: false }
               - { name: heading_level, label: "Heading Level", widget: select, options: [h2, h3, h4], default: h2, required: false, hint: "Controls how prominent the heading is and its place in the page outline — use h3/h4 for a heading that's secondary to the page's main h2s." }
-              - { name: align, label: "Text Alignment", widget: select, options: [left, center, right], default: center, required: false }
+              - { name: heading_align, label: "Heading Alignment", widget: select, options: [left, center, right], default: center, required: false }
+              - { name: body_align, label: "Body Alignment", widget: select, options: [left, center, right], default: center, required: false }
               - { name: body, label: Body, widget: markdown, buttons: [bold, italic, link, bulleted-list, numbered-list], editor_components: [] }
           - name: services_list
             label: Services List
