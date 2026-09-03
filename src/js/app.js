@@ -4,6 +4,20 @@
  * =====================================================
  */
 
+/* ── SITE CONFIG ──────────────────────────────────── */
+// Read from this <script>'s own data-* attributes (set server-side by
+// base.njk) rather than a separate inline <script>, so the strict CSP
+// (script-src has no 'unsafe-inline') doesn't block it.
+const SITE_CONFIG = (() => {
+  const ds = document.currentScript.dataset;
+  return {
+    business: { phone: ds.phone, email: ds.email },
+    mapEmbedUrl: ds.mapEmbedUrl,
+    sheets: { formWebAppUrl: ds.formWebAppUrl },
+    turnstileSiteKey: ds.turnstileSiteKey,
+  };
+})();
+
 /* ── BOT PROTECTION ──────────────────────────────── */
 // Record page load time; submissions under 3 seconds are almost certainly bots
 const _pageLoadTime = Date.now();
