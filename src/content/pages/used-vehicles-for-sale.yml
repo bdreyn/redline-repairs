@@ -3,11 +3,35 @@ slug: used-vehicles-for-sale
 show_in_nav: true
 nav_label: Used Vehicles
 seo:
-  description: Used vehicles for sale
+  description: Browse quality used cars for sale in Tyler, TX from a shop you already trust. Every vehicle is inspected by our technicians. Honest pricing, no surprises. Call (903) 330-5749.
   og_image: ''
   noindex: false
 blocks:
   - type: richtext
     id: ''
-    heading: Coupes and Sedans
-    body: Used coupes and sedans, running or not running
+    heading: Used Vehicles for Sale in Tyler, TX
+    body: |-
+      Looking for a reliable used car without the dealership runaround? At Redline Repairs LLC, we now offer a small selection of pre-owned vehicles that have been inspected by the same technicians who repair cars every day.
+      Because we see what’s really going on under the hood, we only list vehicles we’re comfortable standing behind. No pressure, no gimmicks — just straightforward cars at fair prices for drivers in Tyler and East Texas.
+  - type: custom_html
+    html:
+      lang: html
+      code: |-
+        <h2>Why Buy a Used Car From Redline Repairs?</h2>
+
+        <ul>
+        <li>Thorough multi-point inspection by our own mechanics</li>
+        <li>Honest condition reports — we tell you what we know</li>
+        <li>Transparent pricing with no hidden fees</li>
+        <li>Local ownership and personal service</li>
+        <li>Convenient location at 6252 Rhones Quarter Rd, Tyler</li>
+        </ul>
+
+        <p>Whether you need a daily driver, a work vehicle, or something affordable to get back on the road, we’re here to help.</p>
+  - type: richtext
+    id: ''
+    heading: ''
+    body: |-
+      We’re currently building our inventory of used coupes and sedans. Some vehicles are ready to drive; others may need minor work. Check back soon or give us a call to see what’s available.
+
+      Occasionally we have vehicles that need repair or restoration. These can be a great value if you’re handy or want us to get them road-ready for you.
