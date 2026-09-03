@@ -1,9 +1,7 @@
 backend:
   name: github
   repo: bdreyn/redline-repairs
-  # NOTE: points at the review branch during Phase G testing.
-  # Change to `main` at cutover (see plan Phase G, step 6).
-  branch: sveltia-cms
+  branch: main
   base_url: https://sveltia-cms-auth.bdreyn.workers.dev
 
 site_url: https://www.redlinerepairsllc.com
