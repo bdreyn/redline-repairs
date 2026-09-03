@@ -11,6 +11,7 @@ blocks:
     id: ''
     heading: Used Vehicles for Sale in Tyler, TX
     heading_level: h2
+    align: left
     body: |-
       Looking for a reliable used car without the dealership runaround? At Redline Repairs LLC, we now offer a small selection of pre-owned vehicles that have been inspected by the same technicians who repair cars every day.
       Because we see what’s really going on under the hood, we only list vehicles we’re comfortable standing behind. No pressure, no gimmicks — just straightforward cars at fair prices for drivers in Tyler and East Texas.
@@ -18,6 +19,7 @@ blocks:
     id: ''
     heading: Why Buy a Used Car from Redline Repairs?
     heading_level: h2
+    align: left
     body: |-
       - Thorough multi-point inspection by our own mechanics
       - Honest condition reports — we tell you what we know
@@ -30,6 +32,7 @@ blocks:
     id: ''
     heading: ''
     heading_level: ''
+    align: left
     body: |-
       We’re currently building our inventory of used coupes and sedans. Some vehicles are ready to drive; others may need minor work. Check back soon or give us a call to see what’s available.
 
