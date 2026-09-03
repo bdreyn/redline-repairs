@@ -1,5 +1,5 @@
 {% set headingTag = block.heading_level if block.heading_level in ["h2", "h3", "h4"] else "h2" %}
-<section id="{{ block.id or 'richtext' }}">
+<section id="{{ block.id or 'richtext' }}" class="richtext-section">
   <div class="container mission-inner">
     {% if block.heading %}<{{ headingTag }}>{{ block.heading }}</{{ headingTag }}>{% endif %}
     {{ block.body | markdown | safe }}

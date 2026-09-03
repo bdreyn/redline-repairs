@@ -237,11 +237,13 @@ h4 { font-size: 1.15rem; color: var(--primary); }
   background: linear-gradient(to top, white, transparent);
 }
 
-/* ===== MISSION ===== */
-#mission { padding: 5rem 0; background: white; }
+/* ===== RICH TEXT (formerly "mission" — id varies per block now) ===== */
+.richtext-section { padding: 5rem 0; background: white; }
 .mission-inner { max-width: 860px; margin: 0 auto; text-align: center; }
-#mission h2 { margin-bottom: 1.5rem; }
-#missionText { font-size: 1.15rem; color: var(--gray-600); line-height: 1.8; }
+.richtext-section h2,
+.richtext-section h3,
+.richtext-section h4 { margin-bottom: 1.5rem; }
+.mission-inner p { font-size: 1.15rem; color: var(--gray-600); line-height: 1.8; }
 
 /* ===== SERVICES ===== */
 #services { padding: 5rem 0; background: var(--gray-100); }
@@ -651,7 +653,21 @@ h4 { font-size: 1.15rem; color: var(--primary); }
   color: white; text-decoration: underline; white-space: nowrap;
 }
 body.has-announcement #navbar { top: var(--announcement-height); }
-body.has-announcement #hero { padding-top: calc(100px + var(--announcement-height)); }
+/* The base 100px nav-clearance lives on .hero-content (hero is a centered
+   flex item inside #hero), so the extra announcement-bar clearance needs to
+   go on the same element, not on #hero itself. */
+body.has-announcement .hero-content { padding-top: calc(100px + var(--announcement-height)); }
+
+/* Non-hero sections have no built-in clearance for the fixed navbar — #hero
+   is the only section with its own padding-top for this. Any other section
+   landing first in <main> (e.g. a page that opens with a Rich Text block)
+   needs the same clearance as a fallback. */
+main > section:first-child:not(#hero) {
+  padding-top: 100px;
+}
+body.has-announcement main > section:first-child:not(#hero) {
+  padding-top: calc(100px + var(--announcement-height));
+}
 
 /* ===== FEATURED SERVICE ===== */
 .service-card--featured {
