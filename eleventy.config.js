@@ -1,16 +1,14 @@
+import MarkdownIt from "markdown-it";
+
+const md = new MarkdownIt({
+  html: false, // literal HTML in the markdown source is escaped, not rendered —
+  // raw HTML has its own dedicated "Custom HTML" block for trusted editors
+  breaks: true, // a single line break becomes <br>, not just blank-line paragraphs
+  linkify: true,
+});
+
 export default function (eleventyConfig) {
-  eleventyConfig.addFilter("nl2p", (value) => {
-    if (!value) return "";
-    const escape = (str) =>
-      String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-    return String(value)
-      .split(/\n\s*\n/)
-      .map((para) => `<p>${escape(para.trim()).replace(/\n/g, "<br>")}</p>`)
-      .join("\n");
-  });
+  eleventyConfig.addFilter("markdown", (value) => (value ? md.render(String(value)) : ""));
 
   eleventyConfig.addFilter("prettyDate", (value) => {
     if (!value) return "";
